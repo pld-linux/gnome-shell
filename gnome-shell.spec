@@ -6,7 +6,7 @@ License:	GPL v2+
 Group:		X11/Window Managers
 URL:		http://git.gnome.org/cgit/gnome-shell
 Source0:	http://download.gnome.org/sources/gnome-shell/2.28/%{name}-%{version}.tar.bz2
-# Source0-md5:	3926895782024cff7af7ca480df46b4f
+# Source0-md5:	a9f93a6f03da60f2f6e3fb82a9e7dc94
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
