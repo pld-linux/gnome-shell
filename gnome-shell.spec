@@ -67,3 +67,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/mutter/plugins/*.so
 %attr(755,root,root) %{_libdir}/mutter/plugins/*.la
 %{_datadir}/%{name}
+%{_desktopdir}/*.desktop
