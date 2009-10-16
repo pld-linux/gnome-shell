@@ -6,10 +6,14 @@ License:	GPL v2+
 Group:		X11/Window Managers
 URL:		http://git.gnome.org/cgit/gnome-shell
 Source0:	http://download.gnome.org/sources/gnome-shell/2.28/%{name}-%{version}.tar.bz2
+# Source0-md5:	a9f93a6f03da60f2f6e3fb82a9e7dc94
 BuildRequires:	clutter-devel
+BuildRequires:	gjs-devel
 BuildRequires:	gnome-desktop-devel
 BuildRequires:	gobject-introspection-devel
-# Source0-md5:	a9f93a6f03da60f2f6e3fb82a9e7dc94
+BuildRequires:	mutter-devel
+# for libmozjs.so
+BuildRequires:	xulrunner-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,6 +33,7 @@ Files for development with %{name}.
 %setup -q
 
 %build
+export LD_LIBRARY_PATH=/usr/lib/xulrunner
 %configure \
 	--disable-schemas-install \
 	--disable-static
@@ -56,3 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/mutter
+%{_sysconfdir}/gconf/schemas/%{name}.schemas
+%{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/mutter/plugins/*.so
+%attr(755,root,root) %{_libdir}/mutter/plugins/*.la
+%{_datadir}/%{name}
