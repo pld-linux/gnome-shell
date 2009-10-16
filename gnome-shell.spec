@@ -7,6 +7,8 @@ Group:		X11/Window Managers
 URL:		http://git.gnome.org/cgit/gnome-shell
 Source0:	http://download.gnome.org/sources/gnome-shell/2.28/%{name}-%{version}.tar.bz2
 BuildRequires:	clutter-devel
+BuildRequires:	gnome-desktop-devel
+BuildRequires:	gobject-introspection-devel
 # Source0-md5:	a9f93a6f03da60f2f6e3fb82a9e7dc94
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
