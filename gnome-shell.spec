@@ -33,9 +33,10 @@ Files for development with %{name}.
 %setup -q
 
 %build
-export LD_LIBRARY_PATH=/usr/lib/xulrunner
+export LD_LIBRARY_PATH=%{_libdir}/xulrunner
 %configure \
 	--disable-schemas-install \
+	--disable-silent-rules \
 	--disable-static
 %{__make}
 
