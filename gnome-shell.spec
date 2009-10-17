@@ -14,7 +14,7 @@ BuildRequires:	gnome-desktop-devel
 BuildRequires:	gobject-introspection-devel
 BuildRequires:	intltool >= 0.26
 BuildRequires:	mutter-devel
-BuildRequires:	pango-devel >= 1.26.0
+BuildRequires:	pango-devel >= 1:1.26.0
 BuildRequires:	pkgconfig >= 0.16
 # for libmozjs.so
 BuildRequires:	xulrunner-libs
