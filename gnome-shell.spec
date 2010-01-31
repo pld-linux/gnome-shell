@@ -9,13 +9,17 @@ Source0:	http://download.gnome.org/sources/gnome-shell/2.28/%{name}-%{version}.t
 # Source0-md5:	a9f93a6f03da60f2f6e3fb82a9e7dc94
 BuildRequires:	clutter-devel
 BuildRequires:	gettext-devel
+BuildRequires:	gir-repository-devel
 BuildRequires:	gjs-devel
 BuildRequires:	gnome-desktop-devel
+BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel
 BuildRequires:	intltool >= 0.26
+BuildRequires:	librsvg-devel
 BuildRequires:	mutter-devel
 BuildRequires:	pango-devel >= 1:1.26.0
 BuildRequires:	pkgconfig >= 0.16
+BuildRequires:	rpm-pythonprov
 # for libmozjs.so
 BuildRequires:	xulrunner-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
