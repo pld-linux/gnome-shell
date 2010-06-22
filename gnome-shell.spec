@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.29.1
+Version:	2.31.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.29/%{name}-%{version}.tar.bz2
-# Source0-md5:	dc98591ba7fe8acb92292bc0b2f9d246
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.31/%{name}-%{version}.tar.bz2
+# Source0-md5:	42f593eddbe3dcc2552f8ac2ca3748b6
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
@@ -13,7 +13,7 @@ BuildRequires:	automake >= 1:1.10
 BuildRequires:	clutter-devel >= 1.2.0
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gjs-devel >= 0.6
+BuildRequires:	gjs-devel >= 0.7
 BuildRequires:	glib2-devel >= 1:2.16.0
 BuildRequires:	gnome-desktop-devel >= 2.26.0
 BuildRequires:	gnome-menus-devel
@@ -83,9 +83,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gnome-shell
+%attr(755,root,root) %{_bindir}/gnome-shell-clock-preferences
 %attr(755,root,root) %{_libdir}/mutter/plugins/libgnome-shell.so
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
 %{_libdir}/gnome-shell
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
+%{_desktopdir}/gnome-shell-clock-preferences.desktop
 %{_mandir}/man1/gnome-shell.1*
