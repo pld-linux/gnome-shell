@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.31.2
+Version:	2.31.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.31/%{name}-%{version}.tar.bz2
-# Source0-md5:	42f593eddbe3dcc2552f8ac2ca3748b6
+# Source0-md5:	ba8b85b3b723b6c1f05847cbe2fc06de
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
@@ -14,10 +14,10 @@ BuildRequires:	clutter-devel >= 1.2.0
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7
-BuildRequires:	glib2-devel >= 1:2.16.0
+BuildRequires:	glib2-devel >= 1:2.25.9
 BuildRequires:	gnome-desktop-devel >= 2.26.0
 BuildRequires:	gnome-menus-devel
-BuildRequires:	gobject-introspection-devel >= 0.6.9
+BuildRequires:	gobject-introspection-devel >= 0.9.0
 BuildRequires:	gstreamer-devel >= 0.10.16
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.16
 BuildRequires:	gtk+2-devel >= 2:2.19.0
@@ -25,7 +25,7 @@ BuildRequires:	intltool >= 0.26
 BuildRequires:	libcroco-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	mutter-devel >= 2.29.1
+BuildRequires:	mutter-devel >= 2.31.4
 BuildRequires:	pango-devel >= 1:1.26.0
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	rpm-pythonprov
@@ -59,7 +59,7 @@ export LD_LIBRARY_PATH=%{_libdir}/xulrunner
 	--disable-schemas-install \
 	--disable-silent-rules \
 	--disable-static
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -86,7 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gnome-shell-clock-preferences
 %attr(755,root,root) %{_libdir}/mutter/plugins/libgnome-shell.so
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
+%{_sysconfdir}/xdg/menus/gs-applications.menu
 %{_libdir}/gnome-shell
+%{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-clock-preferences.desktop
