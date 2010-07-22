@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.31.4
+Version:	2.31.5
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.31/%{name}-%{version}.tar.bz2
-# Source0-md5:	ba8b85b3b723b6c1f05847cbe2fc06de
+# Source0-md5:	ec104431e34ed9fb98a3216f6ef9f0f0
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
@@ -15,17 +15,17 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7
 BuildRequires:	glib2-devel >= 1:2.25.9
-BuildRequires:	gnome-desktop-devel >= 2.26.0
+BuildRequires:	gnome-desktop3-devel
 BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel >= 0.9.0
 BuildRequires:	gstreamer-devel >= 0.10.16
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.16
-BuildRequires:	gtk+2-devel >= 2:2.19.0
+BuildRequires:	gtk+3-devel >= 2.90.4
 BuildRequires:	intltool >= 0.26
 BuildRequires:	libcroco-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	mutter-devel >= 2.31.4
+BuildRequires:	mutter-devel >= 2.31.5
 BuildRequires:	pango-devel >= 1:1.26.0
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	rpm-pythonprov
