@@ -1,39 +1,40 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.31.5
+Version:	2.91.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.31/%{name}-%{version}.tar.bz2
-# Source0-md5:	ec104431e34ed9fb98a3216f6ef9f0f0
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
+# Source0-md5:	a4592aafebe032e126604304391ceb03
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
-BuildRequires:	clutter-devel >= 1.2.0
+BuildRequires:	clutter-devel >= 1.3.14
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gjs-devel >= 0.7
-BuildRequires:	glib2-devel >= 1:2.25.9
-BuildRequires:	gnome-desktop3-devel
+BuildRequires:	gjs-devel >= 0.7.5
+BuildRequires:	glib2-devel >= 1:2.26.0
+BuildRequires:	gnome-desktop3-devel >= 2.90.0
 BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel >= 0.9.0
 BuildRequires:	gstreamer-devel >= 0.10.16
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.16
-BuildRequires:	gtk+3-devel >= 2.90.4
+BuildRequires:	gtk+3-devel >= 2.91.0
 BuildRequires:	intltool >= 0.26
+BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
-BuildRequires:	librsvg-devel
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	mutter-devel >= 2.31.5
-BuildRequires:	pango-devel >= 1:1.26.0
+BuildRequires:	mutter-devel >= 2.91.0
 BuildRequires:	pkgconfig >= 1:0.22
+BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel
 # for libmozjs.so
 BuildRequires:	xulrunner-libs
 Requires(post,preun):	GConf2
-Requires:	mutter >= 2.29.1
+Requires(post,postun):	glib2 >= 1:2.26.0
+Requires:	mutter >= 2.91.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -76,9 +77,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %gconf_schema_install gnome-shell.schemas
+%{_bindir}/glib-compile-schemas %{_datadir}/glib-2.0/schemas
 
 %preun
 %gconf_schema_uninstall gnome-shell.schemas
+
+%postun
+if [ "$1" = "0" ]; then
+	%{_bindir}/glib-compile-schemas %{_datadir}/glib-2.0/schemas
+fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -88,6 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
 %{_sysconfdir}/xdg/menus/gs-applications.menu
 %{_libdir}/gnome-shell
+%{_datadir}/glib-2.0/schemas/org.gnome.accessibility.magnifier.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
