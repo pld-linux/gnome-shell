@@ -34,6 +34,7 @@ BuildRequires:	startup-notification-devel
 BuildRequires:	xulrunner-libs
 Requires(post,preun):	GConf2
 Requires(post,postun):	glib2 >= 1:2.26.0
+Requires:	gsettings-desktop-schemas
 Requires:	mutter >= 2.91.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
