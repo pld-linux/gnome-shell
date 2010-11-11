@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.91.1
+Version:	2.91.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	a4592aafebe032e126604304391ceb03
+# Source0-md5:	97da75ffce5de8184257ae6b9373432f
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
