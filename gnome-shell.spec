@@ -1,16 +1,16 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.91.2
+Version:	2.91.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	97da75ffce5de8184257ae6b9373432f
+# Source0-md5:	467a577946f044c96e046bff90075895
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
-BuildRequires:	clutter-devel >= 1.3.14
+BuildRequires:	clutter-devel >= 1.5.8
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7.5
@@ -25,7 +25,7 @@ BuildRequires:	intltool >= 0.26
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	mutter-devel >= 2.91.0
+BuildRequires:	mutter-devel >= 2.91.3
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
