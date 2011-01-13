@@ -1,17 +1,17 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.91.4
+Version:	2.91.5
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	63010847f5887dd97d00e6d7a3bf22b3
+# Source0-md5:	bc0d9d427cb8d52e9889f3cbf47809cd
 Patch0:		gtk3.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
-BuildRequires:	clutter-devel >= 1.5.8
+BuildRequires:	clutter-devel >= 1.5.12
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7.5
@@ -95,7 +95,6 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gnome-shell
-%attr(755,root,root) %{_bindir}/gnome-shell-clock-preferences
 %attr(755,root,root) %{_libdir}/mutter/plugins/libgnome-shell.so
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
 %{_sysconfdir}/xdg/menus/gs-applications.menu
@@ -104,5 +103,4 @@ fi
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
-%{_desktopdir}/gnome-shell-clock-preferences.desktop
 %{_mandir}/man1/gnome-shell.1*
