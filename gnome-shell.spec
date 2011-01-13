@@ -35,8 +35,9 @@ BuildRequires:	startup-notification-devel
 BuildRequires:	xorg-lib-libXfixes-devel
 # for libmozjs.so
 BuildRequires:	xulrunner-libs
-Requires(post,preun):	GConf2
 Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,preun):	GConf2
+Requires:	gnome-settings-daemon >= 2.91.8
 Requires:	gsettings-desktop-schemas
 Requires:	mutter >= 2.91.4
 Suggests:	gtk3-engines-themes
