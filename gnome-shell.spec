@@ -39,6 +39,7 @@ Requires(post,preun):	GConf2
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	gsettings-desktop-schemas
 Requires:	mutter >= 2.91.4
+Suggests:	gtk3-engines-themes
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
