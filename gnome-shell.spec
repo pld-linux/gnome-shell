@@ -15,7 +15,7 @@ BuildRequires:	clutter-devel >= 1.5.12
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gjs-devel >= 0.7.5
+BuildRequires:	gjs-devel >= 0.7.8
 BuildRequires:	glib2-devel >= 1:2.26.0
 #BuildRequires:	gnome-bluetooth >= 2.90
 BuildRequires:	gnome-desktop3-devel >= 2.91.4
