@@ -1,7 +1,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	2.91.6
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
@@ -23,7 +23,7 @@ BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel >= 0.9.0
 BuildRequires:	gstreamer-devel >= 0.10.16
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.16
-BuildRequires:	gtk+3-devel >= 2.91.7
+BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.26
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
@@ -41,7 +41,6 @@ Requires(post,preun):	GConf2
 Requires:	gnome-settings-daemon >= 2.91.8
 Requires:	gsettings-desktop-schemas
 Requires:	mutter >= 2.91.4
-Suggests:	gtk3-engines-themes
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
