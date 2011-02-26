@@ -1,12 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.91.6
-Release:	3
+Version:	2.91.90
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	fe4fffc4725c4cdb85c3500117eef936
-Patch0:		gtk3.patch
+# Source0-md5:	035b395a0ecea3fafe15f34596b09b5a
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
@@ -15,7 +14,7 @@ BuildRequires:	clutter-devel >= 1.5.12
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gjs-devel >= 0.7.8
+BuildRequires:	gjs-devel >= 0.7.11
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gnome-bluetooth-devel >= 2.91.5
 BuildRequires:	gnome-desktop3-devel >= 2.91.4
@@ -28,8 +27,9 @@ BuildRequires:	intltool >= 0.26
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	mutter-devel >= 2.91.4
+BuildRequires:	mutter-devel >= 2.91.90
 BuildRequires:	pkgconfig >= 1:0.22
+BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel
@@ -40,7 +40,7 @@ Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
 Requires:	gnome-settings-daemon >= 2.91.8
 Requires:	gsettings-desktop-schemas
-Requires:	mutter >= 2.91.4
+Requires:	mutter >= 2.91.90
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,7 +53,6 @@ experience.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__intltoolize}
@@ -101,7 +100,6 @@ fi
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
 %{_sysconfdir}/xdg/menus/gs-applications.menu
 %{_libdir}/gnome-shell
-%{_datadir}/glib-2.0/schemas/org.gnome.accessibility.magnifier.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
