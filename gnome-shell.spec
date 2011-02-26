@@ -12,7 +12,7 @@ BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	clutter-devel >= 1.5.12
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel
+BuildRequires:	evolution-data-server-devel >= 2.91.90
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7.11
 BuildRequires:	glib2-devel >= 1:2.26.0
