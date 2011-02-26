@@ -33,6 +33,7 @@ BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel
+BuildRequires:	telepathy-glib-devel >= 0.13.12
 BuildRequires:	xorg-lib-libXfixes-devel
 # for libmozjs.so
 BuildRequires:	xulrunner-libs
