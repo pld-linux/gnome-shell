@@ -75,7 +75,16 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/mutter/plugins/*.la
+mv $RPM_BUILD_ROOT%{_bindir}/gnome-shell{,.bin}
+cat > $RPM_BUILD_ROOT%{_bindir}/gnome-shell <<'EOF'
+#!/bin/sh
+LD_LIBRARY_PATH=%{_libdir}/xulrunner
+export LD_LIBRARY_PATH
+exec %{_bindir}/gnome-shell.bin "${@}"
+EOF
+chmod a+rx $RPM_BUILD_ROOT%{_bindir}/gnome-shell
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/libgnome-shell.la
 
 %find_lang %{name}
 
@@ -97,10 +106,16 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gnome-shell
+%attr(755,root,root) %{_bindir}/gnome-shell.bin
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
 %attr(755,root,root) %{_libdir}/gnome-shell-calendar-server
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
-%{_libdir}/gnome-shell
+%dir %{_libdir}/gnome-shell
+%attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
+%{_libdir}/gnome-shell/Gdm-1.0.typelib
+%{_libdir}/gnome-shell/Gvc-1.0.typelib
+%{_libdir}/gnome-shell/Shell-0.1.typelib
+%{_libdir}/gnome-shell/St-1.0.typelib
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-shell
