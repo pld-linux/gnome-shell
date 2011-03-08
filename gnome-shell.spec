@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.91.90
+Version:	2.91.91
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	035b395a0ecea3fafe15f34596b09b5a
+# Source0-md5:	fdd89714c9ae3bfffe56cf3199219cf6
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
@@ -27,7 +27,7 @@ BuildRequires:	intltool >= 0.26
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	mutter-devel >= 2.91.90
+BuildRequires:	mutter-devel >= 2.91.91
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
@@ -97,10 +97,11 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gnome-shell
-%attr(755,root,root) %{_libdir}/mutter/plugins/libgnome-shell.so
+%attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
+%attr(755,root,root) %{_libdir}/gnome-shell-calendar-server
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
-%{_sysconfdir}/xdg/menus/gs-applications.menu
 %{_libdir}/gnome-shell
+%{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
