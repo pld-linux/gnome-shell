@@ -10,7 +10,7 @@ URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
-BuildRequires:	clutter-devel >= 1.5.12
+BuildRequires:	clutter-devel >= 1.6.0
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 2.91.90
 BuildRequires:	gettext-devel
@@ -19,19 +19,22 @@ BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gnome-bluetooth-devel >= 2.91.5
 BuildRequires:	gnome-desktop3-devel >= 2.91.4
 BuildRequires:	gnome-menus-devel
-BuildRequires:	gobject-introspection-devel >= 0.9.0
-BuildRequires:	gstreamer-devel >= 0.10.16
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.16
+BuildRequires:	gobject-introspection-devel >= 0.10.1
+BuildRequires:	gsettings-desktop-schemas-devel >= 0.1.7
+BuildRequires:	gstreamer-devel >= 0.10.21
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.21
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.26
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
 BuildRequires:	libtool >= 2:2.2.6
+BuildRequires:	libxml2-devel
 BuildRequires:	mutter-devel >= 2.91.91
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	startup-notification-devel
 BuildRequires:	telepathy-glib-devel >= 0.13.12
 BuildRequires:	xorg-lib-libXfixes-devel
@@ -40,7 +43,7 @@ BuildRequires:	xulrunner-libs
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
 Requires:	gnome-settings-daemon >= 2.91.8
-Requires:	gsettings-desktop-schemas
+Requires:	gsettings-desktop-schemas >= 0.1.7
 Requires:	mutter >= 2.91.90
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -93,14 +96,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %gconf_schema_install gnome-shell.schemas
-%{_bindir}/glib-compile-schemas %{_datadir}/glib-2.0/schemas
+%glib_compile_schemas
 
 %preun
 %gconf_schema_uninstall gnome-shell.schemas
 
 %postun
 if [ "$1" = "0" ]; then
-	%{_bindir}/glib-compile-schemas %{_datadir}/glib-2.0/schemas
+	%glib_compile_schemas
 fi
 
 %files -f %{name}.lang
