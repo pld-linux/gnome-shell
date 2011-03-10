@@ -42,6 +42,7 @@ BuildRequires:	xorg-lib-libXfixes-devel
 BuildRequires:	xulrunner-libs
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
+Requires:	gnome-bluetooth-libs >= 2.91.91-2
 Requires:	gnome-settings-daemon >= 2.91.8
 Requires:	gsettings-desktop-schemas >= 0.1.7
 Requires:	mutter >= 2.91.90
