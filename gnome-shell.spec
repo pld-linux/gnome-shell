@@ -20,7 +20,7 @@ BuildRequires:	gnome-bluetooth-devel >= 2.91.5
 BuildRequires:	gnome-desktop3-devel >= 2.91.4
 BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gsettings-desktop-schemas-devel >= 0.1.7
+BuildRequires:	gsettings-desktop-schemas-devel >= 2.91.91
 BuildRequires:	gstreamer-devel >= 0.10.21
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.21
 BuildRequires:	gtk+3-devel >= 3.0.0
