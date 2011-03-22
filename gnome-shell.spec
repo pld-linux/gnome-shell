@@ -1,13 +1,14 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	2.91.91
+Version:	2.91.92
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	fdd89714c9ae3bfffe56cf3199219cf6
+# Source0-md5:	9e34b881a7a3ad6d8bd2d821e63986d0
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
+BuildRequires:	NetworkManager-devel >= 0.8.995
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	clutter-devel >= 1.6.0
@@ -15,7 +16,7 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 2.91.90
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7.11
-BuildRequires:	glib2-devel >= 1:2.26.0
+BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gnome-bluetooth-devel >= 2.91.5
 BuildRequires:	gnome-desktop3-devel >= 2.91.4
 BuildRequires:	gnome-menus-devel
@@ -29,7 +30,7 @@ BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
-BuildRequires:	mutter-devel >= 2.91.91
+BuildRequires:	mutter-devel >= 2.91.92
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
@@ -37,6 +38,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	startup-notification-devel
 BuildRequires:	telepathy-glib-devel >= 0.13.12
+BuildRequires:	telepathy-logger-devel >= 0.2.4
 BuildRequires:	xorg-lib-libXfixes-devel
 # for libmozjs.so
 BuildRequires:	xulrunner-libs
@@ -45,7 +47,7 @@ Requires(post,preun):	GConf2
 Requires:	gnome-bluetooth-libs >= 2.91.91-2
 Requires:	gnome-settings-daemon >= 2.91.8
 Requires:	gsettings-desktop-schemas >= 0.1.7
-Requires:	mutter >= 2.91.90
+Requires:	mutter >= 2.91.92
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -113,6 +115,7 @@ fi
 %attr(755,root,root) %{_bindir}/gnome-shell.bin
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
 %attr(755,root,root) %{_libdir}/gnome-shell-calendar-server
+%attr(755,root,root) %{_libdir}/gnome-shell-perf-helper
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
 %dir %{_libdir}/gnome-shell
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
