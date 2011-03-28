@@ -1,7 +1,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	2.91.92
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/2.91/%{name}-%{version}.tar.bz2
@@ -18,7 +18,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7.11
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gnome-bluetooth-devel >= 2.91.5
-BuildRequires:	gnome-desktop3-devel >= 2.91.4
+BuildRequires:	gnome-desktop-devel >= 2.91.93
 BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel >= 0.10.1
 BuildRequires:	gsettings-desktop-schemas-devel >= 2.91.91
