@@ -1,7 +1,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.0.0.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.0/%{name}-%{version}.tar.bz2
@@ -65,7 +65,7 @@ experience.
 %build
 %{__intltoolize}
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
