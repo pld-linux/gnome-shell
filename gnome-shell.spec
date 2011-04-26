@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.0.0.2
-Release:	2
+Version:	3.0.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	3d95ad1e1d174ffe204ae9d9a0c3009c
+# Source0-md5:	d20a2d748bfed2f62e579962fdad0a06
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.995
@@ -13,15 +13,15 @@ BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	clutter-devel >= 1.6.0
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 2.91.90
+BuildRequires:	evolution-data-server-devel >= 3.0.0
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7.11
 BuildRequires:	glib2-devel >= 1:2.28.0
-BuildRequires:	gnome-bluetooth-devel >= 2.91.5
-BuildRequires:	gnome-desktop-devel >= 2.91.93
+BuildRequires:	gnome-bluetooth-devel >= 3.0.0
+BuildRequires:	gnome-desktop-devel >= 3.0.0
 BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gsettings-desktop-schemas-devel >= 2.91.91
+BuildRequires:	gsettings-desktop-schemas-devel >= 3.0.0
 BuildRequires:	gstreamer-devel >= 0.10.21
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.21
 BuildRequires:	gtk+3-devel >= 3.0.0
@@ -30,24 +30,24 @@ BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
-BuildRequires:	mutter-devel >= 3.0.0
+BuildRequires:	mutter-devel >= 3.0.1
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	startup-notification-devel
-BuildRequires:	telepathy-glib-devel >= 0.13.12
+BuildRequires:	telepathy-glib-devel >= 0.14.0
 BuildRequires:	telepathy-logger-devel >= 0.2.4
 BuildRequires:	xorg-lib-libXfixes-devel
 # for libmozjs.so
 BuildRequires:	xulrunner-libs
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
-Requires:	gnome-bluetooth-libs >= 2.91.91-2
-Requires:	gnome-settings-daemon >= 2.91.8
+Requires:	gnome-bluetooth-libs >= 3.0.0
+Requires:	gnome-settings-daemon >= 3.0.0
 Requires:	gsettings-desktop-schemas >= 0.1.7
-Requires:	mutter >= 3.0.0
+Requires:	mutter >= 3.0.1
 %requires_eq	xulrunner-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
