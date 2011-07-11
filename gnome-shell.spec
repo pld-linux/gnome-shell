@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.0.2
-Release:	3
+Version:	3.1.3
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	ea5194dc27301ca7ee00a97f5f3ab625
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.1/%{name}-%{version}.tar.bz2
+# Source0-md5:	be29a47fc40e90055b194f290044f50c
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.999
@@ -17,7 +17,7 @@ BuildRequires:	evolution-data-server-devel >= 3.0.0
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 0.7.11
 BuildRequires:	glib2-devel >= 1:2.28.0
-BuildRequires:	gnome-bluetooth-devel >= 3.0.0
+BuildRequires:	gnome-bluetooth-devel >= 3.1.0
 BuildRequires:	gnome-desktop-devel >= 3.0.0
 BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel >= 0.10.1
@@ -44,7 +44,7 @@ BuildRequires:	xorg-lib-libXfixes-devel
 BuildRequires:	xulrunner-libs
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
-Requires:	gnome-bluetooth-libs >= 3.0.0
+Requires:	gnome-bluetooth-libs >= 3.1.0
 Requires:	gnome-settings-daemon >= 3.0.0
 Requires:	gsettings-desktop-schemas >= 0.1.7
 Requires:	mutter >= 3.0.1
