@@ -1,7 +1,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.0.2
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.0/%{name}-%{version}.tar.bz2
@@ -79,6 +79,7 @@ export LD_LIBRARY_PATH=%{_libdir}/xulrunner
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/extensions
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
