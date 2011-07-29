@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.1.3
+Version:	3.1.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	be29a47fc40e90055b194f290044f50c
+# Source0-md5:	519668a5ec8aa2447e8122f753b1d43f
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.999
@@ -15,10 +15,10 @@ BuildRequires:	clutter-devel >= 1.6.0
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 3.0.0
 BuildRequires:	gettext-devel
-BuildRequires:	gjs-devel >= 0.7.11
+BuildRequires:	gjs-devel >= 1.29.15
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gnome-bluetooth-devel >= 3.1.0
-BuildRequires:	gnome-desktop-devel >= 3.0.0
+BuildRequires:	gnome-desktop-devel >= 3.1.3
 BuildRequires:	gnome-menus-devel
 BuildRequires:	gobject-introspection-devel >= 0.10.1
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.0.0
@@ -116,8 +116,9 @@ fi
 %attr(755,root,root) %{_bindir}/gnome-shell
 %attr(755,root,root) %{_bindir}/gnome-shell.bin
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
-%attr(755,root,root) %{_libdir}/gnome-shell-calendar-server
-%attr(755,root,root) %{_libdir}/gnome-shell-perf-helper
+%attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
+%attr(755,root,root) %{_libexecdir}/gnome-shell-hotplug-sniffer
+%attr(755,root,root) %{_libexecdir}/gnome-shell-perf-helper
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
 %dir %{_libdir}/gnome-shell
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
@@ -126,6 +127,7 @@ fi
 %{_libdir}/gnome-shell/Shell-0.1.typelib
 %{_libdir}/gnome-shell/St-1.0.typelib
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
+%{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
