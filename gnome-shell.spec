@@ -1,7 +1,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.0.2
-Release:	5
+Release:	6
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.0/%{name}-%{version}.tar.bz2
@@ -84,12 +84,13 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/extensions
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# TODO use rpath at link time instead of this hack
 mv $RPM_BUILD_ROOT%{_bindir}/gnome-shell{,.bin}
 cat > $RPM_BUILD_ROOT%{_bindir}/gnome-shell <<'EOF'
 #!/bin/sh
 LD_LIBRARY_PATH=%{_libdir}/xulrunner
 export LD_LIBRARY_PATH
-exec %{_bindir}/gnome-shell.bin "${@}"
+exec %{_bindir}/gnome-shell.bin "$@"
 EOF
 chmod a+rx $RPM_BUILD_ROOT%{_bindir}/gnome-shell
 
