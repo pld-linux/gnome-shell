@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.1.4
+Version:	3.1.90.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	519668a5ec8aa2447e8122f753b1d43f
+# Source0-md5:	38c4959ee10aab1661a6796b02db01b8
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.999
@@ -14,12 +14,13 @@ BuildRequires:	automake >= 1:1.10
 BuildRequires:	clutter-devel >= 1.6.0
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 3.0.0
+BuildRequires:	folks-devel >= 0.5.2
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 1.29.15
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gnome-bluetooth-devel >= 3.1.0
 BuildRequires:	gnome-desktop-devel >= 3.1.3
-BuildRequires:	gnome-menus-devel
+BuildRequires:	gnome-menus-devel >= 3.1.90
 BuildRequires:	gobject-introspection-devel >= 0.10.1
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.0.0
 BuildRequires:	gstreamer-devel >= 0.10.21
@@ -37,7 +38,7 @@ BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	startup-notification-devel
-BuildRequires:	telepathy-glib-devel >= 0.14.0
+BuildRequires:	telepathy-glib-devel >= 0.15.5
 BuildRequires:	telepathy-logger-devel >= 0.2.4
 BuildRequires:	xorg-lib-libXfixes-devel
 # for libmozjs.so
@@ -122,7 +123,6 @@ fi
 %{_sysconfdir}/gconf/schemas/gnome-shell.schemas
 %dir %{_libdir}/gnome-shell
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
-%{_libdir}/gnome-shell/Gdm-1.0.typelib
 %{_libdir}/gnome-shell/Gvc-1.0.typelib
 %{_libdir}/gnome-shell/Shell-0.1.typelib
 %{_libdir}/gnome-shell/St-1.0.typelib
