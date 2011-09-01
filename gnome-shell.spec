@@ -14,7 +14,7 @@ BuildRequires:	automake >= 1:1.10
 BuildRequires:	clutter-devel >= 1.6.0
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 3.1.90
-BuildRequires:	folks-devel >= 0.5.2
+BuildRequires:	folks-devel >= 0.6.1
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel >= 1.29.15
 BuildRequires:	glib2-devel >= 1:2.28.0
