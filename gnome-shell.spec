@@ -45,6 +45,7 @@ BuildRequires:	xorg-lib-libXfixes-devel
 BuildRequires:	xulrunner-libs
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
+Requires:	caribou >= 0.3.5
 Requires:	gnome-bluetooth-libs >= 3.1.0
 Requires:	gnome-settings-daemon >= 3.0.0
 Requires:	gsettings-desktop-schemas >= 0.1.7
