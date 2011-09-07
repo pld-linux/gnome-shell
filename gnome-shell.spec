@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.1.90.1
+Version:	3.1.91
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	38c4959ee10aab1661a6796b02db01b8
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.1/%{name}-%{version}.tar.xz
+# Source0-md5:	0bd0fdf1e45bf467f650d55e97a15fdb
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.999
@@ -38,11 +38,13 @@ BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	startup-notification-devel
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= 0.15.5
 BuildRequires:	telepathy-logger-devel >= 0.2.4
 BuildRequires:	xorg-lib-libXfixes-devel
 # for libmozjs.so
 BuildRequires:	xulrunner-libs
+BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
 Requires:	caribou >= 0.3.5
