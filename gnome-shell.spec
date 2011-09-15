@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.1.91
+Version:	3.1.91.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.1/%{name}-%{version}.tar.xz
-# Source0-md5:	0bd0fdf1e45bf467f650d55e97a15fdb
+# Source0-md5:	938e2899de498a66e121829e784a8999
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.999
@@ -27,6 +27,7 @@ BuildRequires:	gstreamer-devel >= 0.10.21
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.21
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.26
+BuildRequires:	json-glib-devel >= 0.13.90
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel
 BuildRequires:	libtool >= 2:2.2.6
@@ -64,6 +65,24 @@ capabilities of modern graphics hardware and introduces innovative
 user interface concepts to provide a delightful and easy to use
 experience.
 
+%package -n browser-plugin-%{name}
+Summary:	gnome-shell plugin for WWW browsers
+Summary(pl.UTF-8):	Wtyczka gnome-shell do przeglądarek WWW
+Group:		X11/Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	browser-plugins >= 2.0
+Requires:	browser-plugins(%{_target_base_arch})
+Provides:	mozilla-firefox-plugin-gnome-shell = %{version}-%{release}
+Provides:	mozilla-plugin-gnome-shell = %{version}-%{release}
+Obsoletes:	mozilla-firefox-plugin-gnome-shell < %{version}-%{release}
+Obsoletes:	mozilla-plugin-gnome-shell < %{version}-%{release}
+
+%description -n browser-plugin-%{name}
+gnome-shell plugin for WWW browsers.
+
+%description -n browser-plugin-%{name} -l pl.UTF-8
+Wtyczka gnome-shell do przeglądarek WWW.
+
 %prep
 %setup -q
 
@@ -76,6 +95,7 @@ experience.
 %{__automake}
 export LD_LIBRARY_PATH=%{_libdir}/xulrunner
 %configure \
+	--with-ca-certificates=/etc/certs/ca-certificates.crt \
 	--disable-schemas-install \
 	--disable-silent-rules \
 	--disable-static
@@ -85,7 +105,8 @@ export LD_LIBRARY_PATH=%{_libdir}/xulrunner
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	mozillalibdir=%{_browserpluginsdir}
 
 mv $RPM_BUILD_ROOT%{_bindir}/gnome-shell{,.bin}
 cat > $RPM_BUILD_ROOT%{_bindir}/gnome-shell <<'EOF'
@@ -96,7 +117,8 @@ exec %{_bindir}/gnome-shell.bin "${@}"
 EOF
 chmod a+rx $RPM_BUILD_ROOT%{_bindir}/gnome-shell
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/libgnome-shell.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/libgnome-shell.la \
+	$RPM_BUILD_ROOT%{_browserpluginsdir}/*.la
 
 %find_lang %{name}
 
@@ -113,6 +135,14 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 if [ "$1" = "0" ]; then
 	%glib_compile_schemas
+fi
+
+%post -n browser-plugin-%{name}
+%update_browser_plugins
+
+%postun -n browser-plugin-%{name}
+if [ "$1" = 0 ]; then
+	%update_browser_plugins
 fi
 
 %files -f %{name}.lang
@@ -135,3 +165,7 @@ fi
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
 %{_mandir}/man1/gnome-shell.1*
+
+%files -n browser-plugin-%{name}
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_browserpluginsdir}/libgnome-shell-browser-plugin.so
