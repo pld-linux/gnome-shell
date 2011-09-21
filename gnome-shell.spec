@@ -1,38 +1,40 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.1.91.1
+Version:	3.1.92
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.1/%{name}-%{version}.tar.xz
-# Source0-md5:	938e2899de498a66e121829e784a8999
+# Source0-md5:	bbb0c766376b3d3c3e26ed47db02ba81
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.999
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
-BuildRequires:	clutter-devel >= 1.6.0
+BuildRequires:	clutter-devel >= 1.7.5
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 3.1.90
 BuildRequires:	folks-devel >= 0.6.1
 BuildRequires:	gettext-devel
-BuildRequires:	gjs-devel >= 1.29.15
-BuildRequires:	glib2-devel >= 1:2.28.0
+BuildRequires:	gjs-devel >= 1.29.18
+BuildRequires:	glib2-devel >= 1:2.29.10
 BuildRequires:	gnome-bluetooth-devel >= 3.1.0
-BuildRequires:	gnome-desktop-devel >= 3.1.3
+BuildRequires:	gnome-desktop-devel >= 3.1.90
 BuildRequires:	gnome-menus-devel >= 3.1.90
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gsettings-desktop-schemas-devel >= 3.0.0
+BuildRequires:	gsettings-desktop-schemas-devel >= 3.1.90
 BuildRequires:	gstreamer-devel >= 0.10.21
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.21
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.26
 BuildRequires:	json-glib-devel >= 0.13.90
 BuildRequires:	libcanberra-devel
-BuildRequires:	libcroco-devel
+BuildRequires:	libcroco-devel >= 0.6.2
+BuildRequires:	libgnome-keyring-devel
+BuildRequires:	libsoup-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
-BuildRequires:	mutter-devel >= 3.0.1
+BuildRequires:	mutter-devel >= 3.1.91.1
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
@@ -49,10 +51,11 @@ BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
 Requires:	caribou >= 0.3.5
+Requires:	evolution-data-server >= 3.1.90
 Requires:	gnome-bluetooth-libs >= 3.1.0
-Requires:	gnome-settings-daemon >= 3.0.0
-Requires:	gsettings-desktop-schemas >= 0.1.7
-Requires:	mutter >= 3.0.1
+Requires:	gnome-settings-daemon >= 3.1.90
+Requires:	gsettings-desktop-schemas >= 3.1.90
+Requires:	mutter >= 3.1.91.1
 %requires_eq	xulrunner-libs
 Suggests:	gnome-icon-theme-symbolic >= 3.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
