@@ -15,7 +15,7 @@ BuildRequires:	clutter-devel >= 1.7.5
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 3.1.90
 BuildRequires:	folks-devel >= 0.6.1
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	gjs-devel >= 1.29.18
 BuildRequires:	glib2-devel >= 1:2.29.10
 BuildRequires:	gnome-bluetooth-devel >= 3.1.0
@@ -26,7 +26,7 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.1.90
 BuildRequires:	gstreamer-devel >= 0.10.21
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.21
 BuildRequires:	gtk+3-devel >= 3.0.0
-BuildRequires:	intltool >= 0.26
+BuildRequires:	intltool >= 0.40
 BuildRequires:	json-glib-devel >= 0.13.90
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcroco-devel >= 0.6.2
@@ -40,7 +40,7 @@ BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
-BuildRequires:	startup-notification-devel
+BuildRequires:	startup-notification-devel >= 0.11
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= 0.15.5
 BuildRequires:	telepathy-logger-devel >= 0.2.4
