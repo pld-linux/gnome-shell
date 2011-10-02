@@ -1,7 +1,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.2.0
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.2/%{name}-%{version}.tar.xz
@@ -53,9 +53,11 @@ Requires(post,preun):	GConf2
 Requires:	caribou >= 0.3.5
 Requires:	evolution-data-server >= 3.1.90
 Requires:	gnome-bluetooth-libs >= 3.1.0
+Requires:	gnome-menus >= 3.1.90
 Requires:	gnome-settings-daemon >= 3.1.90
 Requires:	gsettings-desktop-schemas >= 3.1.90
 Requires:	mutter >= 3.1.91.1
+Requires:	telepathy-logger >= 0.2.4
 %requires_eq	xulrunner-libs
 Suggests:	gnome-icon-theme-symbolic >= 3.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
