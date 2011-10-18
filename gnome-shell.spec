@@ -1,11 +1,11 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.2.0
-Release:	3
+Version:	3.2.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.2/%{name}-%{version}.tar.xz
-# Source0-md5:	684d7620f1dfd144b2d97ab970daa1ad
+# Source0-md5:	9519921d31d8c43d054dbc11e1f0733b
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.999
@@ -34,7 +34,7 @@ BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libsoup-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
-BuildRequires:	mutter-devel >= 3.2.0
+BuildRequires:	mutter-devel >= 3.2.1
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
@@ -56,7 +56,7 @@ Requires:	gnome-bluetooth-libs >= 3.1.0
 Requires:	gnome-menus >= 3.1.90
 Requires:	gnome-settings-daemon >= 3.1.90
 Requires:	gsettings-desktop-schemas >= 3.1.90
-Requires:	mutter >= 3.1.91.1
+Requires:	mutter >= 3.2.1
 Requires:	telepathy-logger >= 0.2.4
 %requires_eq	xulrunner-libs
 Suggests:	gnome-icon-theme-symbolic >= 3.0.0
