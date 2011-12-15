@@ -7,6 +7,7 @@ Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.2/%{name}-%{version}.tar.xz
 # Source0-md5:	9519921d31d8c43d054dbc11e1f0733b
 Patch0:		browser-plugin-webkit.patch
+Patch1:		extension-delete.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	GConf2-devel
 BuildRequires:	NetworkManager-devel >= 0.8.999
@@ -95,6 +96,7 @@ Wtyczka gnome-shell do przeglądarek WWW.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__intltoolize}

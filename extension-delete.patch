@@ -1,0 +1,46 @@
+From ef49670ae491993cbfcfe666d389485c3a7c8adb Mon Sep 17 00:00:00 2001
+From: Jasper St. Pierre <jstpierre@mecheye.net>
+Date: Thu, 01 Dec 2011 02:46:52 +0000
+Subject: fileUtils: Fix recursivelyDeleteDir
+
+---
+diff --git a/js/misc/fileUtils.js b/js/misc/fileUtils.js
+index cd7339c..7466be8 100644
+--- a/js/misc/fileUtils.js
++++ b/js/misc/fileUtils.js
+@@ -38,7 +38,7 @@ function recursivelyDeleteDir(dir) {
+         let child = dir.get_child(info.get_name());
+         if (type == Gio.FileType.REGULAR)
+             deleteGFile(child);
+-        else if (type == Gio.TypeType.DIRECTORY)
++        else if (type == Gio.FileType.DIRECTORY)
+             recursivelyDeleteDir(child);
+     }
+ 
+--
+cgit v0.9.0.2
+From bbb83656bf83c9740fe68db7e35e05ea4f129b01 Mon Sep 17 00:00:00 2001
+From: Jasper St. Pierre <jstpierre@mecheye.net>
+Date: Thu, 01 Dec 2011 03:02:09 +0000
+Subject: extensionSystem: Set the proper 'enabled' and 'type' parameters
+
+When installing an extension at runtime, we accidentally swapped the 'type'
+and 'enabled' parameters. While this doesn't directly affect anything right
+now, as everything works coincidentally, future patches that look at the
+'type' parameter to decide what to do would get the wrong answer.
+---
+diff --git a/js/ui/extensionSystem.js b/js/ui/extensionSystem.js
+index a0302fe..9aadb3a 100644
+--- a/js/ui/extensionSystem.js
++++ b/js/ui/extensionSystem.js
+@@ -202,7 +202,7 @@ function gotExtensionZipFile(session, message, uuid) {
+             global.settings.set_strv(ENABLED_EXTENSIONS_KEY, enabledExtensions);
+         }
+ 
+-        loadExtension(dir, true, ExtensionType.PER_USER);
++        loadExtension(dir, ExtensionType.PER_USER, true);
+     });
+ }
+ 
+--
+cgit v0.9.0.2
