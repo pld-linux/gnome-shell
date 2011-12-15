@@ -1,0 +1,240 @@
+from https://extensions.gnome.org/about/#old-version:
+browser-plugin: Set that we need XEmbed
+browser-plugin: Use g_strndup to get a string property
+browser-plugin: Make sure to use the UTF8Length parameter
+browser-plugin: Fix memory leak when passing an invalid UUID
+
+From 2c2729f7be6ff4d8946c51ff8b59187fe38052d1 Mon Sep 17 00:00:00 2001
+From: Jasper St. Pierre <jstpierre@mecheye.net>
+Date: Fri, 11 Nov 2011 03:35:41 +0000
+Subject: browser-plugin: Set that we need XEmbed
+
+This makes the plugin work under WebKit-based browsers such as Chromium and
+Epiphany. See http://code.google.com/p/chromium/issues/detail?id=38229 and
+WindowedCreatePlugin() in
+http://src.chromium.org/viewvc/chrome/trunk/src/webkit/plugins/npapi/webplugin_delegate_impl_gtk.cc?revision=86823&content-type=text%2Fplain
+for more information.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=663823
+---
+diff --git a/browser-plugin/browser-plugin.c b/browser-plugin/browser-plugin.c
+index 0ab2d78..2daa0dd 100644
+--- a/browser-plugin/browser-plugin.c
++++ b/browser-plugin/browser-plugin.c
+@@ -816,6 +816,11 @@ NPP_GetValue(NPP          instance,
+ 
+     *(NPObject**)value = funcs.createobject (instance, &plugin_class);
+     break;
++
++  case NPPVpluginNeedsXEmbed:
++    *(bool *)value = TRUE;
++    break;
++
+   default:
+     ;
+   }
+--
+cgit v0.9.0.2
+From 9bc1a68fe48a0b1e8f377597387baea7a90a3a5b Mon Sep 17 00:00:00 2001
+From: Jasper St. Pierre <jstpierre@mecheye.net>
+Date: Fri, 11 Nov 2011 04:57:39 +0000
+Subject: browser-plugin: Use g_strndup to get a string property
+
+WebKit-based browsers like Chromium and Epiphany may insert extra junk at the
+end of NPStrings, so we cannot depend on the strlen matching.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=663823
+---
+diff --git a/browser-plugin/browser-plugin.c b/browser-plugin/browser-plugin.c
+index 2daa0dd..b717889 100644
+--- a/browser-plugin/browser-plugin.c
++++ b/browser-plugin/browser-plugin.c
+@@ -71,10 +71,7 @@ get_string_property (NPP         instance,
+     goto out;
+ 
+   result_str = NPVARIANT_TO_STRING (result);
+-  if (strlen (result_str.UTF8Characters) != result_str.UTF8Length)
+-    goto out;
+-
+-  result_copy = g_strdup (result_str.UTF8Characters);
++  result_copy = g_strndup (result_str.UTF8Characters, result_str.UTF8Length);
+ 
+  out:
+   funcs.releasevariantvalue (&result);
+--
+cgit v0.9.0.2
+From ab6a7773ce0bf0b6614fe81acc26521739723853 Mon Sep 17 00:00:00 2001
+From: Jasper St. Pierre <jstpierre@mecheye.net>
+Date: Thu, 17 Nov 2011 04:47:35 +0000
+Subject: browser-plugin: Make sure to use the UTF8Length parameter
+
+Some plugin hosts may have junk after the UTF8Characters that we need to strip
+off. No current browsers that I know of do this, but it still helps to be
+correct.
+---
+diff --git a/browser-plugin/browser-plugin.c b/browser-plugin/browser-plugin.c
+index 385550c..e9f9950 100644
+--- a/browser-plugin/browser-plugin.c
++++ b/browser-plugin/browser-plugin.c
+@@ -455,7 +455,7 @@ plugin_enable_extension (PluginObject *obj,
+                          NPString      uuid,
+                          gboolean      enabled)
+ {
+-  const gchar *uuid_str = uuid.UTF8Characters;
++  gchar *uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+     return FALSE;
+ 
+@@ -468,6 +468,8 @@ plugin_enable_extension (PluginObject *obj,
+                      NULL, /* callback */
+                      NULL /* user_data */);
+ 
++  g_free (uuid_str);
++
+   return TRUE;
+ }
+ 
+@@ -476,7 +478,7 @@ plugin_install_extension (PluginObject *obj,
+                           NPString      uuid,
+                           NPString      version_tag)
+ {
+-  const gchar *uuid_str = uuid.UTF8Characters;
++  gchar *uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+     return FALSE;
+ 
+@@ -491,6 +493,8 @@ plugin_install_extension (PluginObject *obj,
+                      NULL, /* callback */
+                      NULL /* user_data */);
+ 
++  g_free (uuid_str);
++
+   return TRUE;
+ }
+ 
+@@ -501,9 +505,9 @@ plugin_uninstall_extension (PluginObject *obj,
+ {
+   GError *error = NULL;
+   GVariant *res;
+-  const gchar *uuid_str;
++  gchar *uuid_str;
+ 
+-  uuid_str = uuid.UTF8Characters;
++  uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+     return FALSE;
+ 
+@@ -516,6 +520,8 @@ plugin_uninstall_extension (PluginObject *obj,
+                                 NULL, /* cancellable */
+                                 &error);
+ 
++  g_free (uuid_str);
++
+   if (!res)
+     {
+       g_warning ("Failed to uninstall extension: %s", error->message);
+@@ -533,9 +539,9 @@ plugin_get_info (PluginObject *obj,
+ {
+   GError *error = NULL;
+   GVariant *res;
+-  const gchar *uuid_str;
++  gchar *uuid_str;
+ 
+-  uuid_str = uuid.UTF8Characters;
++  uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+     return FALSE;
+ 
+@@ -547,6 +553,8 @@ plugin_get_info (PluginObject *obj,
+                                 NULL, /* cancellable */
+                                 &error);
+ 
++  g_free (uuid_str);
++
+   if (!res)
+     {
+       g_warning ("Failed to retrieve extension metadata: %s", error->message);
+@@ -564,9 +572,9 @@ plugin_get_errors (PluginObject *obj,
+ {
+   GError *error = NULL;
+   GVariant *res;
+-  const gchar *uuid_str;
++  gchar *uuid_str;
+ 
+-  uuid_str = uuid.UTF8Characters;
++  uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+     return FALSE;
+ 
+@@ -578,6 +586,8 @@ plugin_get_errors (PluginObject *obj,
+                                 NULL, /* cancellable */
+                                 &error);
+ 
++  g_free (uuid_str);
++
+   if (!res)
+     {
+       g_warning ("Failed to retrieve errors: %s", error->message);
+--
+cgit v0.9.0.2
+From 02af8eb824bde8cc21b58365772d67e0d6c5992f Mon Sep 17 00:00:00 2001
+From: Jasper St. Pierre <jstpierre@mecheye.net>
+Date: Tue, 06 Dec 2011 20:00:52 +0000
+Subject: browser-plugin: Fix memory leak when passing an invalid UUID
+
+https://bugzilla.gnome.org/show_bug.cgi?id=665261
+---
+diff --git a/browser-plugin/browser-plugin.c b/browser-plugin/browser-plugin.c
+index fccb061..a80a492 100644
+--- a/browser-plugin/browser-plugin.c
++++ b/browser-plugin/browser-plugin.c
+@@ -480,7 +480,10 @@ plugin_install_extension (PluginObject *obj,
+ {
+   gchar *uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+-    return FALSE;
++    {
++      g_free (uuid_str);
++      return FALSE;
++    }
+ 
+   g_dbus_proxy_call (obj->proxy,
+                      "InstallRemoteExtension",
+@@ -509,7 +512,10 @@ plugin_uninstall_extension (PluginObject *obj,
+ 
+   uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+-    return FALSE;
++    {
++      g_free (uuid_str);
++      return FALSE;
++    }
+ 
+   res = g_dbus_proxy_call_sync (obj->proxy,
+                                 "UninstallExtension",
+@@ -543,7 +549,10 @@ plugin_get_info (PluginObject *obj,
+ 
+   uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+-    return FALSE;
++    {
++      g_free (uuid_str);
++      return FALSE;
++    }
+ 
+   res = g_dbus_proxy_call_sync (obj->proxy,
+                                 "GetExtensionInfo",
+@@ -576,7 +585,10 @@ plugin_get_errors (PluginObject *obj,
+ 
+   uuid_str = g_strndup (uuid.UTF8Characters, uuid.UTF8Length);
+   if (!uuid_is_valid (uuid_str))
+-    return FALSE;
++    {
++      g_free (uuid_str);
++      return FALSE;
++    }
+ 
+   res = g_dbus_proxy_call_sync (obj->proxy,
+                                 "GetExtensionErrors",
+--
+cgit v0.9.0.2
