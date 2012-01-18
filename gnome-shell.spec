@@ -1,7 +1,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.2.1
-Release:	6
+Release:	7
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.2/%{name}-%{version}.tar.xz
@@ -18,7 +18,7 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 3.1.90
 BuildRequires:	folks-devel >= 0.6.1
 BuildRequires:	gettext-devel >= 0.17
-BuildRequires:	gjs-devel >= 1.29.18
+BuildRequires:	gjs-devel >= 1.30.1
 BuildRequires:	glib2-devel >= 1:2.29.10
 BuildRequires:	gnome-bluetooth-devel >= 3.1.0
 BuildRequires:	gnome-desktop-devel >= 3.1.90
@@ -47,8 +47,6 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= 0.15.5
 BuildRequires:	telepathy-logger-devel >= 0.2.4
 BuildRequires:	xorg-lib-libXfixes-devel
-# for libmozjs.so
-BuildRequires:	xulrunner-libs
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,preun):	GConf2
@@ -61,7 +59,6 @@ Requires:	gsettings-desktop-schemas >= 3.1.90
 Requires:	mutter >= 3.2.1
 Requires:	nautilus >= 3.2.0
 Requires:	telepathy-logger >= 0.2.4
-%requires_eq	xulrunner-libs
 Suggests:	gnome-contacts >= 3.2.0
 Suggests:	gnome-icon-theme-symbolic >= 3.0.0
 Provides:	gdm-wm = 3.2.1-1
@@ -105,7 +102,6 @@ Wtyczka gnome-shell do przeglądarek WWW.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-export LD_LIBRARY_PATH=%{_libdir}/xulrunner
 %configure \
 	--with-ca-certificates=/etc/certs/ca-certificates.crt \
 	--disable-schemas-install \
@@ -122,16 +118,6 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/extensions
 	install_sh="install -p" \
 	DESTDIR=$RPM_BUILD_ROOT \
 	mozillalibdir=%{_browserpluginsdir}
-
-# TODO use rpath at link time instead of this hack
-mv $RPM_BUILD_ROOT%{_bindir}/gnome-shell{,.bin}
-cat > $RPM_BUILD_ROOT%{_bindir}/gnome-shell <<'EOF'
-#!/bin/sh
-LD_LIBRARY_PATH=%{_libdir}/xulrunner
-export LD_LIBRARY_PATH
-exec %{_bindir}/gnome-shell.bin "$@"
-EOF
-chmod a+rx $RPM_BUILD_ROOT%{_bindir}/gnome-shell
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/libgnome-shell.la \
 	$RPM_BUILD_ROOT%{_browserpluginsdir}/*.la
@@ -164,7 +150,6 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gnome-shell
-%attr(755,root,root) %{_bindir}/gnome-shell.bin
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
 %attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
 %attr(755,root,root) %{_libexecdir}/gnome-shell-hotplug-sniffer
