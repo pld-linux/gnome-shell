@@ -1,11 +1,11 @@
 #
 # Conditional build:
-%bcond_with	systemd # rely on systemd for session tracking instead of ConsoleKit
+%bcond_without	systemd # rely on systemd for session tracking instead of ConsoleKit
 #
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.4.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.4/%{name}-%{version}.tar.xz
