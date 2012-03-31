@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	systemd # rely on systemd for session tracking instead of ConsoleKit
+%bcond_without  systemd # by default use systemd for session tracking instead of ConsoleKit (fallback to ConsoleKit on runtime)
 #
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
