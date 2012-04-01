@@ -128,7 +128,7 @@ Wtyczka gnome-shell do przeglądarek WWW.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/extensions
+install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/{extensions,search-providers}
 
 %{__make} install \
 	INSTALL="install -p" \
