@@ -52,6 +52,7 @@ BuildRequires:	telepathy-logger-devel >= 0.2.4
 BuildRequires:	xorg-lib-libXfixes-devel
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
+Requires:	at-spi2-atk >= 2.4.0
 Requires:	caribou >= 0.3.5
 Requires:	evolution-data-server >= 3.1.90
 Requires:	gjs >= 1.31.10
@@ -64,6 +65,7 @@ Requires:	gtk+3 >= 3.3.9
 Requires:	mutter >= 3.4.0
 Requires:	nautilus >= 3.2.0
 Requires:	telepathy-logger >= 0.2.4
+Requires:	telepathy-mission-control
 Suggests:	gnome-contacts >= 3.2.0
 Suggests:	gnome-icon-theme-symbolic >= 3.0.0
 Provides:	gdm-wm = 3.4.0
