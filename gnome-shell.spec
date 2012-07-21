@@ -4,12 +4,12 @@
 #
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.4.1
-Release:	2
+Version:	3.4.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.4/%{name}-%{version}.tar.xz
-# Source0-md5:	82a7dae5d0aa3de2afe317d882c79ee9
+# Source0-md5:	d1125998a0a89d625eef5e16bd774ef5
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= 0.8.999
 BuildRequires:	autoconf >= 2.63
@@ -183,6 +183,7 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.shell.evolution.calendar.gschema.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
