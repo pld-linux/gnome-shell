@@ -5,7 +5,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.6.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.6/%{name}-%{version}.tar.xz
@@ -140,6 +140,8 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/{extensions,search-providers}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/*.la \
 	$RPM_BUILD_ROOT%{_browserpluginsdir}/*.la
+# evolution already ships this file
+%{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution-calendar.desktop
 
 %find_lang %{name}
 
@@ -184,7 +186,6 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-shell
-%{_desktopdir}/evolution-calendar.desktop
 %{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
 %{_mandir}/man1/gnome-shell.1*
