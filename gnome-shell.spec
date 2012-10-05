@@ -4,31 +4,30 @@
 #
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.4.2
+Version:	3.6.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.4/%{name}-%{version}.tar.xz
-# Source0-md5:	d1125998a0a89d625eef5e16bd774ef5
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.6/%{name}-%{version}.tar.xz
+# Source0-md5:	cf6b87fd37329573c322b384c1593e17
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= 0.8.999
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	clutter-devel >= 1.9.16
+BuildRequires:	clutter-devel >= 1.11.11
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 3.1.90
-BuildRequires:	folks-devel >= 0.6.1
+BuildRequires:	evolution-data-server-devel >= 3.5.3
 BuildRequires:	gcr-devel >= 3.3.90
 BuildRequires:	gettext-devel >= 0.17
-BuildRequires:	gjs-devel >= 1.31.10
+BuildRequires:	gjs-devel >= 1.33.2
 BuildRequires:	glib2-devel >= 1:2.31.6
 BuildRequires:	gnome-bluetooth-devel >= 3.1.0
-BuildRequires:	gnome-desktop-devel >= 3.1.90
-BuildRequires:	gnome-menus-devel >= 3.1.90
+BuildRequires:	gnome-desktop-devel >= 3.5.1
+BuildRequires:	gnome-menus-devel >= 3.5.3
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gsettings-desktop-schemas-devel >= 3.1.90
-BuildRequires:	gstreamer-devel >= 0.10.21
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.21
+BuildRequires:	gsettings-desktop-schemas-devel >= 3.5.4
+BuildRequires:	gstreamer-devel >= 1.0.0
+BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= 3.3.9
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	intltool >= 0.40
@@ -39,7 +38,7 @@ BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libsoup-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
-BuildRequires:	mutter-devel >= 3.4.0
+BuildRequires:	mutter-devel >= 3.6.0
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= 0.100
 BuildRequires:	pulseaudio-devel
@@ -55,21 +54,21 @@ BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	at-spi2-atk >= 2.4.0
 Requires:	caribou >= 0.3.5
-Requires:	evolution-data-server >= 3.1.90
-Requires:	gjs >= 1.31.10
+Requires:	evolution-data-server >= 3.5.3
+Requires:	gjs >= 1.33.2
 Requires:	glib2 >= 1:2.31.6
 Requires:	gnome-bluetooth-libs >= 3.1.0
-Requires:	gnome-menus >= 3.1.90
+Requires:	gnome-menus >= 3.5.3
 Requires:	gnome-settings-daemon >= 3.1.90
-Requires:	gsettings-desktop-schemas >= 3.1.90
+Requires:	gsettings-desktop-schemas >= 3.5.4
 Requires:	gtk+3 >= 3.3.9
-Requires:	mutter >= 3.4.0
+Requires:	mutter >= 3.6.0
 Requires:	nautilus >= 3.2.0
 Requires:	telepathy-logger >= 0.2.4
 Requires:	telepathy-mission-control
 Suggests:	gnome-contacts >= 3.2.0
 Suggests:	gnome-icon-theme-symbolic >= 3.0.0
-Provides:	gdm-wm = 3.4.0
+Provides:	gdm-wm = 3.6.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -168,6 +167,7 @@ fi
 %attr(755,root,root) %{_bindir}/gnome-shell
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-prefs
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
+%attr(755,root,root) %{_bindir}/gnome-shell-perf-tool
 %attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
 %attr(755,root,root) %{_libexecdir}/gnome-shell-hotplug-sniffer
 %attr(755,root,root) %{_libexecdir}/gnome-shell-perf-helper
@@ -183,8 +183,8 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.shell.evolution.calendar.gschema.xml
 %{_datadir}/gnome-shell
+%{_desktopdir}/evolution-calendar.desktop
 %{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
 %{_mandir}/man1/gnome-shell.1*
