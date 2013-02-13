@@ -4,12 +4,12 @@
 #
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.6.2
+Version:	3.6.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.6/%{name}-%{version}.tar.xz
-# Source0-md5:	a50917d9339766ebb77e0f5732024269
+# Source0-md5:	5e3a0cf840d79f944cf8c7afc1c72431
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= 0.8.999
 BuildRequires:	autoconf >= 2.63
@@ -186,6 +186,7 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
+%{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
