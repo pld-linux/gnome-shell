@@ -7,28 +7,52 @@ Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.8/%{name}-%{version}.tar.xz
 # Source0-md5:	f6511b663a9e3eda6f640bfab7a8fa08
 URL:		http://live.gnome.org/GnomeShell
-BuildRequires:	NetworkManager-devel >= 0.9.6
+#
+%define		caribou_version 0.4.8
+%define		clutter_version 1.13.4
+%define		evolution_data_server_version 3.5.3
+%define		gcr_version 3.3.90
+%define		gjs_version 1.35.4
+%define		glib2_version 1:2.35.0
+%define		gnome_bluetooth_version 3.1.0
+%define		gnome_desktop_version 3.7.90
+%define		gnome_menus_version 3.5.3
+%define		gsettings_desktop_schemas_version 3.7.4
+%define		gtk_version 3.7.9
+%define		json_glib_version 0.13.90
+%define		libcroco_version 0.6.8
+%define		mutter_version 3.8.0
+%define		networkmanager_version 0.9.6
+%define		polkit_version 0.100
+%define		pulseaudio_version 2.0
+%define		startup_notification_version 0.11
+%define		telepathy_glib_version 0.17.5
+#
+BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
+BuildRequires:	NetworkManager-gtk-lib-devel >= %{networkmanager_version}
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	caribou-devel >= 0.4.8
-BuildRequires:	clutter-devel >= 1.13.4
-BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 3.5.3
-BuildRequires:	gcr-devel >= 3.3.90
+BuildRequires:	caribou-devel >= %{caribou_version}
+BuildRequires:	clutter-devel >= %{clutter_version}
+BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_version}
+BuildRequires:	gcr-devel >= %{gcr_version}
+BuildRequires:	gdk-pixbuf2-devel
 BuildRequires:	gettext-devel >= 0.17
-BuildRequires:	gjs-devel >= 1.35.4
-BuildRequires:	glib2-devel >= 1:2.35.0
-BuildRequires:	gnome-bluetooth-devel >= 3.1.0
-BuildRequires:	gnome-desktop-devel >= 3.7.90
-BuildRequires:	gnome-menus-devel >= 3.5.3
+BuildRequires:	gjs-devel >= %{gjs_version}
+BuildRequires:	glib2-devel >= %{glib2_version}
+BuildRequires:	gnome-bluetooth-devel >= %{gnome_bluetooth_version}
+BuildRequires:	gnome-control-center-devel
+BuildRequires:	gnome-desktop-devel >= %{gnome_desktop_version}
+BuildRequires:	gnome-menus-devel >= %{gnome_menus_version}
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gsettings-desktop-schemas-devel >= 3.7.4
+BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_version}
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= 3.7.9
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	intltool >= 0.40
-BuildRequires:	json-glib-devel >= 0.13.90
+BuildRequires:	json-glib-devel >= %{json_glib_version}
+BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel
 BuildRequires:	libcroco-devel >= 0.6.8
 BuildRequires:	libsecret-devel
@@ -36,32 +60,45 @@ BuildRequires:	libsoup-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-progs
-BuildRequires:	mutter-devel >= 3.8.0
+BuildRequires:	mutter-devel >= %{mutter_version}
 BuildRequires:	pkgconfig >= 1:0.22
-BuildRequires:	polkit-devel >= 0.100
-BuildRequires:	pulseaudio-devel >= 2.0
+BuildRequires:	polkit-devel >= %{polkit_version}
+BuildRequires:	pulseaudio-devel >= %{pulseaudio_version}
+BuildRequires:	python >= 2.5
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
-BuildRequires:	startup-notification-devel >= 0.11
+BuildRequires:	startup-notification-devel >= %{startup_notification_version}
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	telepathy-glib-devel >= 0.17.5
+BuildRequires:	telepathy-glib-devel >= %{telepathy_glib_version}
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXfixes-devel
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.35.0
+Requires(post,postun):	glib2 >= 1:2.26.0
+Requires:	NetworkManager-libs >= %{networkmanager_version}
 Requires:	at-spi2-atk >= 2.4.0
-Requires:	caribou >= 0.4.8
-Requires:	evolution-data-server >= 3.5.3
-Requires:	gjs >= 1.35.4
-Requires:	glib2 >= 1:2.35.0
-Requires:	gnome-bluetooth-libs >= 3.1.0
-Requires:	gnome-menus >= 3.5.3
-Requires:	gnome-settings-daemon >= 3.1.90
-Requires:	gsettings-desktop-schemas >= 3.7.4
-Requires:	gtk+3 >= 3.7.9
-Requires:	mutter >= 3.8.0
-Requires:	nautilus >= 3.2.0
+Requires:	caribou >= %{caribou_version}
+Requires:	clutter >= %{clutter_version}
+Requires:	evolution-data-server >= %{evolution_data_server_version}
+Requires:	gcr >= %{gcr_version}
+Requires:	gjs >= %{gjs_version}
+Requires:	glib2 >= %{glib2_version}
+Requires:	gnome-bluetooth-libs >= %{gnome_bluetooth_version}
+Requires:	gnome-desktop >= %{gnome_desktop_version}
+Requires:	gnome-menus >= %{gnome_menus_version}
+Requires:	gnome-settings-daemon >= 3.8.0
+Requires:	gsettings-desktop-schemas >= %{gsettings_desktop_schemas_version}
+Requires:	gtk+3 >= %{gtk_version}
+Requires:	json-glib >= %{json_glib_version}
+Requires:	libcroco >= %{libcroco_version}
+Requires:	mutter >= %{mutter_version}
+Requires:	nautilus >= 3.8.0
+Requires:	polkit >= %{polkit_version}
+Requires:	pulseaudio-libs >= %{pulseaudio_version}
+Requires:	startup-notification >= %{startup_notification_version}
+Requires:	telepathy-glib >= %{telepathy_glib_version}
 Requires:	telepathy-mission-control
 Suggests:	gnome-contacts >= 3.2.0
-Suggests:	gnome-icon-theme-symbolic >= 3.0.0
+Suggests:	gnome-icon-theme-symbolic >= 3.8.0
 Provides:	gdm-wm = 3.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -179,6 +216,7 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
+%{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
