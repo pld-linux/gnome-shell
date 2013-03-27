@@ -1,75 +1,68 @@
-#
-# Conditional build:
-%bcond_without  systemd # by default use systemd for session tracking instead of ConsoleKit (fallback to ConsoleKit on runtime)
-#
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.6.3.1
+Version:	3.8.0.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.6/%{name}-%{version}.tar.xz
-# Source0-md5:	6d00d16fd54fa0d0e5d4b3a7dcad0bfe
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.8/%{name}-%{version}.tar.xz
+# Source0-md5:	f6511b663a9e3eda6f640bfab7a8fa08
 URL:		http://live.gnome.org/GnomeShell
-BuildRequires:	NetworkManager-devel >= 0.8.999
+BuildRequires:	NetworkManager-devel >= 0.9.6
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	clutter-devel >= 1.11.11
+BuildRequires:	caribou-devel >= 0.4.8
+BuildRequires:	clutter-devel >= 1.13.4
 BuildRequires:	dbus-glib-devel
 BuildRequires:	evolution-data-server-devel >= 3.5.3
 BuildRequires:	gcr-devel >= 3.3.90
 BuildRequires:	gettext-devel >= 0.17
-BuildRequires:	gjs-devel >= 1.33.2
-BuildRequires:	glib2-devel >= 1:2.31.6
+BuildRequires:	gjs-devel >= 1.35.4
+BuildRequires:	glib2-devel >= 1:2.35.0
 BuildRequires:	gnome-bluetooth-devel >= 3.1.0
-BuildRequires:	gnome-desktop-devel >= 3.5.1
+BuildRequires:	gnome-desktop-devel >= 3.7.90
 BuildRequires:	gnome-menus-devel >= 3.5.3
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gsettings-desktop-schemas-devel >= 3.5.4
+BuildRequires:	gsettings-desktop-schemas-devel >= 3.7.4
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
-BuildRequires:	gtk+3-devel >= 3.3.9
+BuildRequires:	gtk+3-devel >= 3.7.9
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	intltool >= 0.40
 BuildRequires:	json-glib-devel >= 0.13.90
-BuildRequires:	libcanberra-devel
-BuildRequires:	libcroco-devel >= 0.6.2
-BuildRequires:	libgnome-keyring-devel
+BuildRequires:	libcanberra-gtk3-devel
+BuildRequires:	libcroco-devel >= 0.6.8
+BuildRequires:	libsecret-devel
 BuildRequires:	libsoup-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-progs
-BuildRequires:	mutter-devel >= 3.6.2
+BuildRequires:	mutter-devel >= 3.8.0
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= 0.100
-BuildRequires:	pulseaudio-devel
+BuildRequires:	pulseaudio-devel >= 2.0
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	startup-notification-devel >= 0.11
-%{?with_systemd:BuildRequires:	systemd-devel}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= 0.17.5
-BuildRequires:	telepathy-logger-devel >= 0.2.4
-BuildRequires:	xorg-lib-libXfixes-devel
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,postun):	glib2 >= 1:2.35.0
 Requires:	at-spi2-atk >= 2.4.0
-Requires:	caribou >= 0.3.5
+Requires:	caribou >= 0.4.8
 Requires:	evolution-data-server >= 3.5.3
-Requires:	gjs >= 1.33.2
-Requires:	glib2 >= 1:2.31.6
+Requires:	gjs >= 1.35.4
+Requires:	glib2 >= 1:2.35.0
 Requires:	gnome-bluetooth-libs >= 3.1.0
 Requires:	gnome-menus >= 3.5.3
 Requires:	gnome-settings-daemon >= 3.1.90
-Requires:	gsettings-desktop-schemas >= 3.5.4
-Requires:	gtk+3 >= 3.3.9
-Requires:	mutter >= 3.6.2
+Requires:	gsettings-desktop-schemas >= 3.7.4
+Requires:	gtk+3 >= 3.7.9
+Requires:	mutter >= 3.8.0
 Requires:	nautilus >= 3.2.0
-Requires:	telepathy-logger >= 0.2.4
 Requires:	telepathy-mission-control
 Suggests:	gnome-contacts >= 3.2.0
 Suggests:	gnome-icon-theme-symbolic >= 3.0.0
-Provides:	gdm-wm = 3.6.0
+Provides:	gdm-wm = 3.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -121,11 +114,9 @@ Wtyczka gnome-shell do przeglądarek WWW.
 %{__autoheader}
 %{__automake}
 %configure \
-	--with-ca-certificates=/etc/certs/ca-certificates.crt \
 	--enable-gtk-doc \
 	--disable-silent-rules \
 	--disable-static \
-	%{__enable_disable systemd systemd} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make} -j1
 
@@ -182,11 +173,12 @@ fi
 %{_libdir}/gnome-shell/ShellJS-0.1.typelib
 %{_libdir}/gnome-shell/St-1.0.typelib
 %{_datadir}/GConf/gsettings/gnome-shell-overrides.convert
+%{_datadir}/dbus-1/interfaces/org.gnome.Shell.Screenshot.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider.xml
+%{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider2.xml
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
-%{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
