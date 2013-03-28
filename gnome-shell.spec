@@ -1,13 +1,4 @@
-Summary:	Window manager and application launcher for GNOME
-Name:		gnome-shell
-Version:	3.8.0.1
-Release:	2
-License:	GPL v2+
-Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	f6511b663a9e3eda6f640bfab7a8fa08
-URL:		http://live.gnome.org/GnomeShell
-#
+
 %define		caribou_version 0.4.8
 %define		clutter_version 1.13.4
 %define		evolution_data_server_version 3.5.3
@@ -27,7 +18,16 @@ URL:		http://live.gnome.org/GnomeShell
 %define		pulseaudio_version 2.0
 %define		startup_notification_version 0.11
 %define		telepathy_glib_version 0.17.5
-#
+
+Summary:	Window manager and application launcher for GNOME
+Name:		gnome-shell
+Version:	3.8.0.1
+Release:	2
+License:	GPL v2+
+Group:		X11/Window Managers
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.8/%{name}-%{version}.tar.xz
+# Source0-md5:	f6511b663a9e3eda6f640bfab7a8fa08
+URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
 BuildRequires:	NetworkManager-gtk-lib-devel >= %{networkmanager_version}
 BuildRequires:	autoconf >= 2.63
@@ -129,10 +129,6 @@ Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	browser-plugins >= 2.0
 Requires:	browser-plugins(%{_target_base_arch})
-Provides:	mozilla-firefox-plugin-gnome-shell = %{version}-%{release}
-Provides:	mozilla-plugin-gnome-shell = %{version}-%{release}
-Obsoletes:	mozilla-firefox-plugin-gnome-shell < %{version}-%{release}
-Obsoletes:	mozilla-plugin-gnome-shell < %{version}-%{release}
 
 %description -n browser-plugin-%{name}
 gnome-shell plugin for WWW browsers.
