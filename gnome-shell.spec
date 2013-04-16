@@ -12,7 +12,7 @@
 %define		gtk_version 3.7.9
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.8.0
+%define		mutter_version 3.8.1
 %define		networkmanager_version 0.9.6
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -21,12 +21,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.8.0.1
-Release:	2
+Version:	3.8.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	f6511b663a9e3eda6f640bfab7a8fa08
+# Source0-md5:	f225e73c40fd695ae1755ceff54fea0f
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
 BuildRequires:	NetworkManager-gtk-lib-devel >= %{networkmanager_version}
