@@ -1,19 +1,20 @@
-
+# TODO: wayland support
+#
 %define		caribou_version 0.4.8
 %define		clutter_version 1.13.4
 %define		evolution_data_server_version 3.5.3
-%define		gcr_version 3.3.90
+%define		gcr_version 3.7.5
 %define		gjs_version 1.35.4
-%define		glib2_version 1:2.35.0
-%define		gnome_bluetooth_version 3.1.0
+%define		glib2_version 1:2.37.0
+%define		gnome_bluetooth_version 3.9.0
 %define		gnome_desktop_version 3.7.90
 %define		gnome_menus_version 3.5.3
 %define		gsettings_desktop_schemas_version 3.7.4
 %define		gtk_version 3.7.9
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.8.4
-%define		networkmanager_version 0.9.6
+%define		mutter_version 3.10.0
+%define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
 %define		startup_notification_version 0.11
@@ -21,12 +22,13 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.8.4
+Version:	3.10.0.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	b5be396879a4b5bc98b3e9e4ac8d1447
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.10/%{name}-%{version}.tar.xz
+# Source0-md5:	70a9b2008caf11cfc43dd21457c26c95
+Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
 BuildRequires:	NetworkManager-gtk-lib-devel >= %{networkmanager_version}
@@ -72,6 +74,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= %{telepathy_glib_version}
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXfixes-devel
+BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	NetworkManager-libs >= %{networkmanager_version}
@@ -138,6 +141,7 @@ Wtyczka gnome-shell do przeglądarek WWW.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__intltoolize}
@@ -201,10 +205,12 @@ fi
 %dir %{_libdir}/gnome-shell
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-js.so
+%attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-menu.so
 %{_libdir}/gnome-shell/Gvc-1.0.typelib
 %{_libdir}/gnome-shell/Shell-0.1.typelib
 %{_libdir}/gnome-shell/ShellJS-0.1.typelib
 %{_libdir}/gnome-shell/St-1.0.typelib
+%{_libdir}/gnome-shell/ShellMenu-0.1.typelib
 %{_datadir}/GConf/gsettings/gnome-shell-overrides.convert
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Screencast.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Screenshot.xml
