@@ -4,7 +4,7 @@
 %define		clutter_version 1.13.4
 %define		evolution_data_server_version 3.5.3
 %define		gcr_version 3.7.5
-%define		gjs_version 1.35.4
+%define		gjs_version 1.38.1
 %define		glib2_version 1:2.37.0
 %define		gnome_bluetooth_version 3.9.0
 %define		gnome_desktop_version 3.7.90
@@ -13,7 +13,7 @@
 %define		gtk_version 3.7.9
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.10.0
+%define		mutter_version 3.10.1
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -22,12 +22,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.10.0.1
+Version:	3.10.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	70a9b2008caf11cfc43dd21457c26c95
+# Source0-md5:	efcdecf3fff971c50b008ac75895b7ab
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
