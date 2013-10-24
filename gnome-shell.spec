@@ -23,7 +23,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.10.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.10/%{name}-%{version}.tar.xz
@@ -93,6 +93,7 @@ Requires:	gsettings-desktop-schemas >= %{gsettings_desktop_schemas_version}
 Requires:	gtk+3 >= %{gtk_version}
 Requires:	json-glib >= %{json_glib_version}
 Requires:	libcroco >= %{libcroco_version}
+Requires:	metacity-theme-base
 Requires:	mutter >= %{mutter_version}
 Requires:	nautilus >= 3.8.0
 Requires:	polkit >= %{polkit_version}
