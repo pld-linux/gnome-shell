@@ -1,10 +1,10 @@
 # TODO: wayland support
 #
 %define		caribou_version 0.4.8
-%define		clutter_version 1.13.4
+%define		clutter_version 1.16.0
 %define		evolution_data_server_version 3.5.3
 %define		gcr_version 3.7.5
-%define		gjs_version 1.38.1
+%define		gjs_version 1.40.0
 %define		glib2_version 1:2.37.0
 %define		gnome_bluetooth_version 3.9.0
 %define		gnome_desktop_version 3.7.90
@@ -13,7 +13,7 @@
 %define		gtk_version 3.7.9
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.10.4
+%define		mutter_version 3.12.0
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -22,12 +22,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.10.4
-Release:	2
+Version:	3.12.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	f69f0b3985ae8e6da0b3e61f6acedc5f
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.12/%{name}-%{version}.tar.xz
+# Source0-md5:	8071e8531e82b8e56eedf57e65179594
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
@@ -43,6 +43,7 @@ BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	gjs-devel >= %{gjs_version}
 BuildRequires:	glib2-devel >= %{glib2_version}
 BuildRequires:	gnome-bluetooth-devel >= %{gnome_bluetooth_version}
+BuildRequires:	gnome-common
 BuildRequires:	gnome-control-center-devel
 BuildRequires:	gnome-desktop-devel >= %{gnome_desktop_version}
 BuildRequires:	gnome-menus-devel >= %{gnome_menus_version}
@@ -70,6 +71,7 @@ BuildRequires:	python >= 2.5
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	startup-notification-devel >= %{startup_notification_version}
+BuildRequires:	systemd-devel
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= %{telepathy_glib_version}
 BuildRequires:	xorg-lib-libX11-devel
