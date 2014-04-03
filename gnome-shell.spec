@@ -23,7 +23,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.12.0
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.12/%{name}-%{version}.tar.xz
@@ -132,6 +132,9 @@ Summary:	GNOME Shell API documentation
 Summary(pl.UTF-8):	Dokumentacja API GNOME Shell
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 This package provides GNOME Shell API documentation.
