@@ -10,10 +10,10 @@
 %define		gnome_desktop_version 3.7.90
 %define		gnome_menus_version 3.5.3
 %define		gsettings_desktop_schemas_version 3.7.4
-%define		gtk_version 3.7.9
+%define		gtk_version 3.14.0
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.12.2
+%define		mutter_version 3.14.0
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -22,12 +22,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.12.2
+Version:	3.14.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	28a8f52ff3554bfbc7bc2b48cc832378
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.14/%{name}-%{version}.tar.xz
+# Source0-md5:	403d930632dfa60ddc92779992891938
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
@@ -219,6 +219,7 @@ fi
 %attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
 %attr(755,root,root) %{_libexecdir}/gnome-shell-hotplug-sniffer
 %attr(755,root,root) %{_libexecdir}/gnome-shell-perf-helper
+%attr(755,root,root) %{_libexecdir}/gnome-shell-portal-helper
 %dir %{_libdir}/gnome-shell
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-js.so
@@ -231,11 +232,14 @@ fi
 %{_datadir}/GConf/gsettings/gnome-shell-overrides.convert
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
+%{_datadir}/dbus-1/services/org.gnome.Shell.PortalHelper.service
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
 %{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
+%{_desktopdir}/gnome-shell-wayland.desktop
+%{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
 %{_mandir}/man1/gnome-shell.1*
 
 %files devel
