@@ -39,7 +39,7 @@ BuildRequires:	clutter-devel >= %{clutter_version}
 BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_version}
 BuildRequires:	gcr-devel >= %{gcr_version}
 BuildRequires:	gdk-pixbuf2-devel
-BuildRequires:	gettext-devel >= 0.17
+BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	gjs-devel >= %{gjs_version}
 BuildRequires:	glib2-devel >= %{glib2_version}
 BuildRequires:	gnome-bluetooth-devel >= %{gnome_bluetooth_version}
