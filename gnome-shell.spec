@@ -23,7 +23,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.14.3
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.14/%{name}-%{version}.tar.xz
@@ -102,6 +102,7 @@ Requires:	polkit >= %{polkit_version}
 Requires:	pulseaudio-libs >= %{pulseaudio_version}
 Requires:	startup-notification >= %{startup_notification_version}
 Requires:	telepathy-glib >= %{telepathy_glib_version}
+Requires:	telepathy-logger-libs >= 0.2
 Requires:	telepathy-mission-control
 Suggests:	gnome-contacts >= 3.2.0
 Suggests:	gnome-icon-theme-symbolic >= 3.8.0
