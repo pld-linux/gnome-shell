@@ -1,19 +1,19 @@
 # TODO: wayland support
 #
 %define		caribou_version 0.4.8
-%define		clutter_version 1.16.0
-%define		evolution_data_server_version 3.5.3
+%define		clutter_version 1.21.5
+%define		evolution_data_server_version 3.13.90
 %define		gcr_version 3.7.5
 %define		gjs_version 1.40.0
 %define		glib2_version 1:2.37.0
 %define		gnome_bluetooth_version 3.9.0
 %define		gnome_desktop_version 3.7.90
 %define		gnome_menus_version 3.5.3
-%define		gsettings_desktop_schemas_version 3.7.4
-%define		gtk_version 3.14.0
+%define		gsettings_desktop_schemas_version 3.13.1
+%define		gtk_version 3.15.0
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.14.3
+%define		mutter_version 3.16.0
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -22,19 +22,18 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.14.3
-Release:	2
+Version:	3.16.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.14/%{name}-%{version}.tar.xz
-# Source0-md5:	3c380179c79f19b21e7947a2e3455e96
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.16/%{name}-%{version}.tar.xz
+# Source0-md5:	e98d5ead445430d70dba772276a499db
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
 BuildRequires:	NetworkManager-gtk-lib-devel >= %{networkmanager_version}
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	caribou-devel >= %{caribou_version}
 BuildRequires:	clutter-devel >= %{clutter_version}
 BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_version}
 BuildRequires:	gcr-devel >= %{gcr_version}
@@ -51,7 +50,7 @@ BuildRequires:	gobject-introspection-devel >= 0.10.1
 BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_version}
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
-BuildRequires:	gtk+3-devel >= 3.7.9
+BuildRequires:	gtk+3-devel >= %{gtk_version}
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	intltool >= 0.40
 BuildRequires:	json-glib-devel >= %{json_glib_version}
@@ -67,16 +66,16 @@ BuildRequires:	mutter-devel >= %{mutter_version}
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= %{polkit_version}
 BuildRequires:	pulseaudio-devel >= %{pulseaudio_version}
-BuildRequires:	python >= 2.5
+BuildRequires:	python3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
+BuildRequires:	ruby-sass
 BuildRequires:	startup-notification-devel >= %{startup_notification_version}
 BuildRequires:	systemd-devel
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= %{telepathy_glib_version}
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXfixes-devel
-BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	NetworkManager-libs >= %{networkmanager_version}
