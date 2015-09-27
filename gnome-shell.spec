@@ -2,10 +2,10 @@
 #
 %define		caribou_version 0.4.8
 %define		clutter_version 1.21.5
-%define		evolution_data_server_version 3.13.90
+%define		evolution_data_server_version 3.18.0
 %define		gcr_version 3.7.5
 %define		gjs_version 1.40.0
-%define		glib2_version 1:2.37.0
+%define		glib2_version 1:2.46.0
 %define		gnome_bluetooth_version 3.9.0
 %define		gnome_desktop_version 3.7.90
 %define		gnome_menus_version 3.5.3
@@ -13,7 +13,7 @@
 %define		gtk_version 3.15.0
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.16.1
+%define		mutter_version 3.18.0
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -22,12 +22,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.16.3
+Version:	3.18.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.16/%{name}-%{version}.tar.xz
-# Source0-md5:	5360c9ee7c178dd37f302b4d332f88e7
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.18/%{name}-%{version}.tar.xz
+# Source0-md5:	373b3dfcfaa6ac252f0ab6098ed05630
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
@@ -46,7 +46,7 @@ BuildRequires:	gnome-common
 BuildRequires:	gnome-control-center-devel
 BuildRequires:	gnome-desktop-devel >= %{gnome_desktop_version}
 BuildRequires:	gnome-menus-devel >= %{gnome_menus_version}
-BuildRequires:	gobject-introspection-devel >= 0.10.1
+BuildRequires:	gobject-introspection-devel >= 1.46.0
 BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_version}
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
