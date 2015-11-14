@@ -23,7 +23,7 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.18.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.18/%{name}-%{version}.tar.xz
@@ -80,7 +80,7 @@ BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	NetworkManager-libs >= %{networkmanager_version}
 Requires:	at-spi2-atk >= 2.4.0
-Requires:	caribou >= %{caribou_version}
+Requires:	caribou-libs >= %{caribou_version}
 Requires:	clutter >= %{clutter_version}
 Requires:	evolution-data-server >= %{evolution_data_server_version}
 Requires:	gcr >= %{gcr_version}
