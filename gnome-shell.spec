@@ -22,12 +22,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.18.2
-Release:	2
+Version:	3.18.3
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.18/%{name}-%{version}.tar.xz
-# Source0-md5:	a4409c6234ddcad498116b21b98a8648
+# Source0-md5:	3bd4ec21c4f04f551d643258cfffe1e2
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
