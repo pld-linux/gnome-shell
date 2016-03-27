@@ -9,11 +9,11 @@
 %define		gnome_bluetooth_version 3.9.0
 %define		gnome_desktop_version 3.7.90
 %define		gnome_menus_version 3.5.3
-%define		gsettings_desktop_schemas_version 3.13.1
+%define		gsettings_desktop_schemas_version 3.20.0
 %define		gtk_version 3.15.0
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.18.2
+%define		mutter_version 3.20.0
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -22,12 +22,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.18.3
+Version:	3.20.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.18/%{name}-%{version}.tar.xz
-# Source0-md5:	3bd4ec21c4f04f551d643258cfffe1e2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.20/%{name}-%{version}.tar.xz
+# Source0-md5:	7da734b1e6438d28cfc07f5942f62f14
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
@@ -236,9 +236,8 @@ fi
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
-%{_desktopdir}/gnome-shell.desktop
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
-%{_desktopdir}/gnome-shell-wayland.desktop
+%{_desktopdir}/org.gnome.Shell.desktop
 %{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
 %{_mandir}/man1/gnome-shell.1*
 
