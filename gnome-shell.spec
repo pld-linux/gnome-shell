@@ -9,11 +9,11 @@
 %define		gnome_bluetooth_version 3.9.0
 %define		gnome_desktop_version 3.7.90
 %define		gnome_menus_version 3.5.3
-%define		gsettings_desktop_schemas_version 3.20.0
+%define		gsettings_desktop_schemas_version 3.22.0
 %define		gtk_version 3.15.0
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.20.2
+%define		mutter_version 3.22.0
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -22,12 +22,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.20.3
+Version:	3.22.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.20/%{name}-%{version}.tar.xz
-# Source0-md5:	ad722415118092ed02200576a0f32ab6
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.22/%{name}-%{version}.tar.xz
+# Source0-md5:	3e61a96502431d64940514a3fd345f01
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
@@ -46,13 +46,12 @@ BuildRequires:	gnome-common
 BuildRequires:	gnome-control-center-devel
 BuildRequires:	gnome-desktop-devel >= %{gnome_desktop_version}
 BuildRequires:	gnome-menus-devel >= %{gnome_menus_version}
-BuildRequires:	gobject-introspection-devel >= 1.46.0
+BuildRequires:	gobject-introspection-devel >= 1.50.0
 BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_version}
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= %{gtk_version}
 BuildRequires:	gtk-doc >= 1.15
-BuildRequires:	intltool >= 0.40
 BuildRequires:	json-glib-devel >= %{json_glib_version}
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel
@@ -161,7 +160,6 @@ Wtyczka gnome-shell do przeglądarek WWW.
 %patch0 -p1
 
 %build
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
@@ -236,6 +234,7 @@ fi
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
+%{_datadir}/xdg-desktop-portal/portals/gnome-shell.portal
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
 %{_desktopdir}/org.gnome.Shell.desktop
 %{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
