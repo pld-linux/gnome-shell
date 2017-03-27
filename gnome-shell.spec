@@ -24,7 +24,7 @@ Version:	3.24.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.22/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.24/%{name}-%{version}.tar.xz
 # Source0-md5:	f5ab28ed3a96107289e5cea2609ef18a
 Patch0:		link.patch
 URL:		http://live.gnome.org/GnomeShell
