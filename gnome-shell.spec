@@ -21,12 +21,12 @@
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
 Version:	3.26.0
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.26/%{name}-%{version}.tar.xz
 # Source0-md5:	3d31315620d11afcfa8fd6a40a019698
-Patch0:		link.patch
+Patch0:		build.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
 BuildRequires:	NetworkManager-gtk-lib-devel >= %{networkmanager_version}
@@ -59,7 +59,9 @@ BuildRequires:	libsoup-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-progs
+BuildRequires:	meson
 BuildRequires:	mutter-devel >= %{mutter_version}
+BuildRequires:	ninja
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= %{polkit_version}
 BuildRequires:	pulseaudio-devel >= %{pulseaudio_version}
@@ -158,30 +160,23 @@ Wtyczka gnome-shell do przeglądarek WWW.
 %patch0 -p1
 
 %build
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
+export BROWSER_PLUGIN_DIR=%{_browserpluginsdir}
 %configure \
+	--enable-documentation \
 	--enable-gtk-doc \
-	--disable-silent-rules \
-	--disable-static \
-	--with-html-dir=%{_gtkdocdir}
-%{__make} -j1
+	--enable-man
+
+%{__make} \
+	BROWSER_PLUGIN_DIR=%{_browserpluginsdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/{extensions,search-providers}
 
 %{__make} install \
-	INSTALL="install -p" \
-	install_sh="install -p" \
 	DESTDIR=$RPM_BUILD_ROOT \
-	mozillalibdir=%{_browserpluginsdir}
+	BROWSER_PLUGIN_DIR=%{_browserpluginsdir}
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/*.la \
-	$RPM_BUILD_ROOT%{_browserpluginsdir}/*.la
 # evolution already ships this file
 %{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution-calendar.desktop
 
@@ -212,13 +207,15 @@ fi
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-prefs
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
 %attr(755,root,root) %{_bindir}/gnome-shell-perf-tool
-%attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
-%attr(755,root,root) %{_libexecdir}/gnome-shell-hotplug-sniffer
-%attr(755,root,root) %{_libexecdir}/gnome-shell-perf-helper
-%attr(755,root,root) %{_libexecdir}/gnome-shell-portal-helper
+%attr(755,root,root) %{_libdir}/gnome-shell-calendar-server
+%attr(755,root,root) %{_libdir}/gnome-shell-hotplug-sniffer
+%attr(755,root,root) %{_libdir}/gnome-shell-perf-helper
+%attr(755,root,root) %{_libdir}/gnome-shell-portal-helper
 %dir %{_libdir}/gnome-shell
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-menu.so
+%attr(755,root,root) %{_libdir}/gnome-shell/libgvc.so
+%attr(755,root,root) %{_libdir}/gnome-shell/libst-1.0.so
 %{_libdir}/gnome-shell/Gvc-1.0.typelib
 %{_libdir}/gnome-shell/Shell-0.1.typelib
 %{_libdir}/gnome-shell/St-1.0.typelib
@@ -244,10 +241,10 @@ fi
 %{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider2.xml
 
-%files apidocs
-%defattr(644,root,root,755)
-%{_gtkdocdir}/shell
-%{_gtkdocdir}/st
+#%files apidocs
+#%defattr(644,root,root,755)
+#%{_gtkdocdir}/shell
+#%{_gtkdocdir}/st
 
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
