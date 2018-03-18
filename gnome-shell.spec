@@ -11,7 +11,7 @@
 %define		gtk_version 3.15.0
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.26.0
+%define		mutter_version 3.28.0
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -20,18 +20,16 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.26.0
+Version:	3.28.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.26/%{name}-%{version}.tar.xz
-# Source0-md5:	3d31315620d11afcfa8fd6a40a019698
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.28/%{name}-%{version}.tar.xz
+# Source0-md5:	a0bf48381d8f4f081055f73764618016
 Patch0:		build.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
 BuildRequires:	NetworkManager-gtk-lib-devel >= %{networkmanager_version}
-BuildRequires:	autoconf >= 2.63
-BuildRequires:	automake >= 1:1.11
 BuildRequires:	clutter-devel >= %{clutter_version}
 BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_version}
 BuildRequires:	gcr-devel >= %{gcr_version}
@@ -54,12 +52,11 @@ BuildRequires:	json-glib-devel >= %{json_glib_version}
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel
 BuildRequires:	libcroco-devel >= 0.6.8
-BuildRequires:	libsecret-devel
+BuildRequires:	libsecret-devel >= 0.18
 BuildRequires:	libsoup-devel
-BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-progs
-BuildRequires:	meson
+BuildRequires:	meson >= 0.42.0
 BuildRequires:	mutter-devel >= %{mutter_version}
 BuildRequires:	ninja
 BuildRequires:	pkgconfig >= 1:0.22
@@ -69,6 +66,7 @@ BuildRequires:	python3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	ruby-sass
+BuildRequires:	sassc
 BuildRequires:	startup-notification-devel >= %{startup_notification_version}
 BuildRequires:	systemd-devel
 BuildRequires:	tar >= 1:1.22
@@ -160,22 +158,15 @@ Wtyczka gnome-shell do przeglądarek WWW.
 %patch0 -p1
 
 %build
-export BROWSER_PLUGIN_DIR=%{_browserpluginsdir}
-%configure \
-	--enable-documentation \
-	--enable-gtk-doc \
-	--enable-man
-
-%{__make} \
-	BROWSER_PLUGIN_DIR=%{_browserpluginsdir}
+%meson build \
+	-Dgtk_doc=true
+%meson_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/{extensions,search-providers}
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	BROWSER_PLUGIN_DIR=%{_browserpluginsdir}
+%meson_install -C build
 
 # evolution already ships this file
 %{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution-calendar.desktop
@@ -207,10 +198,10 @@ fi
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-prefs
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
 %attr(755,root,root) %{_bindir}/gnome-shell-perf-tool
-%attr(755,root,root) %{_libdir}/gnome-shell-calendar-server
-%attr(755,root,root) %{_libdir}/gnome-shell-hotplug-sniffer
-%attr(755,root,root) %{_libdir}/gnome-shell-perf-helper
-%attr(755,root,root) %{_libdir}/gnome-shell-portal-helper
+%attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
+%attr(755,root,root) %{_libexecdir}/gnome-shell-hotplug-sniffer
+%attr(755,root,root) %{_libexecdir}/gnome-shell-perf-helper
+%attr(755,root,root) %{_libexecdir}/gnome-shell-portal-helper
 %dir %{_libdir}/gnome-shell
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-menu.so
@@ -241,10 +232,10 @@ fi
 %{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider2.xml
 
-#%files apidocs
-#%defattr(644,root,root,755)
-#%{_gtkdocdir}/shell
-#%{_gtkdocdir}/st
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/shell
+%{_gtkdocdir}/st
 
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
