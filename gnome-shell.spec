@@ -11,7 +11,7 @@
 %define		gtk_version 3.15.0
 %define		json_glib_version 0.13.90
 %define		libcroco_version 0.6.8
-%define		mutter_version 3.28.0
+%define		mutter_version 3.30.0
 %define		networkmanager_version 0.9.8
 %define		polkit_version 0.100
 %define		pulseaudio_version 2.0
@@ -20,12 +20,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.28.0
+Version:	3.30.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.28/%{name}-%{version}.tar.xz
-# Source0-md5:	a0bf48381d8f4f081055f73764618016
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.30/%{name}-%{version}.tar.xz
+# Source0-md5:	3aef5c837c85f6e5318b845fc844b1fe
 Patch0:		build.patch
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
@@ -171,6 +171,8 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/{extensions,search-providers}
 # evolution already ships this file
 %{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution-calendar.desktop
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/libgnome-shell*.a
+
 %find_lang %{name}
 
 %clean
@@ -200,6 +202,7 @@ fi
 %attr(755,root,root) %{_bindir}/gnome-shell-perf-tool
 %attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
 %attr(755,root,root) %{_libexecdir}/gnome-shell-hotplug-sniffer
+%attr(755,root,root) %{_libexecdir}/gnome-shell-overrides-migration.sh
 %attr(755,root,root) %{_libexecdir}/gnome-shell-perf-helper
 %attr(755,root,root) %{_libexecdir}/gnome-shell-portal-helper
 %dir %{_libdir}/gnome-shell
@@ -223,9 +226,14 @@ fi
 %{_desktopdir}/org.gnome.Shell.desktop
 %{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
 %{_mandir}/man1/gnome-shell.1*
+%{_sysconfdir}/xdg/autostart/gnome-shell-overrides-migration.desktop
+%{systemduserunitdir}/gnome-shell-wayland.target
+%{systemduserunitdir}/gnome-shell-x11.target
+%{systemduserunitdir}/gnome-shell.service
 
 %files devel
 %defattr(644,root,root,755)
+%{_datadir}/dbus-1/interfaces/org.gnome.Shell.Extensions.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.PadOsd.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Screencast.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Screenshot.xml
