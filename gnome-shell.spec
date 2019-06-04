@@ -20,13 +20,12 @@
 
 Summary:	Window manager and application launcher for GNOME
 Name:		gnome-shell
-Version:	3.30.2
-Release:	2
+Version:	3.32.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.30/%{name}-%{version}.tar.xz
-# Source0-md5:	3aef5c837c85f6e5318b845fc844b1fe
-Patch0:		build.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.32/%{name}-%{version}.tar.xz
+# Source0-md5:	632b67075ebdc183f94461fa05a8505b
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{networkmanager_version}
 BuildRequires:	NetworkManager-gtk-lib-devel >= %{networkmanager_version}
@@ -155,7 +154,6 @@ Wtyczka gnome-shell do przeglądarek WWW.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %meson build \
