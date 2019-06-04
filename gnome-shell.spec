@@ -47,6 +47,7 @@ BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= %{gtk_version}
 BuildRequires:	gtk-doc >= 1.15
+BuildRequires:	ibus-devel
 BuildRequires:	json-glib-devel >= %{json_glib_version}
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel
@@ -102,6 +103,7 @@ Requires:	telepathy-mission-control
 Suggests:	gnome-contacts >= 3.2.0
 Suggests:	gnome-icon-theme-symbolic >= 3.8.0
 Provides:	gdm-wm = 3.8.0
+Obsoletes:	browser-plugin-gnome-shell < 3.32.2-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -138,20 +140,6 @@ This package provides GNOME Shell API documentation.
 %description apidocs -l pl.UTF-8
 Ten pakiet dostarcza dokumentację API GNOME Shell.
 
-%package -n browser-plugin-%{name}
-Summary:	gnome-shell plugin for WWW browsers
-Summary(pl.UTF-8):	Wtyczka gnome-shell do przeglądarek WWW
-Group:		X11/Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	browser-plugins >= 2.0
-Requires:	browser-plugins(%{_target_base_arch})
-
-%description -n browser-plugin-%{name}
-gnome-shell plugin for WWW browsers.
-
-%description -n browser-plugin-%{name} -l pl.UTF-8
-Wtyczka gnome-shell do przeglądarek WWW.
-
 %prep
 %setup -q
 
@@ -184,14 +172,6 @@ if [ "$1" = "0" ]; then
 	%glib_compile_schemas
 fi
 
-%post -n browser-plugin-%{name}
-%update_browser_plugins
-
-%postun -n browser-plugin-%{name}
-if [ "$1" = 0 ]; then
-	%update_browser_plugins
-fi
-
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gnome-shell
@@ -211,11 +191,12 @@ fi
 %{_libdir}/gnome-shell/Gvc-1.0.typelib
 %{_libdir}/gnome-shell/Shell-0.1.typelib
 %{_libdir}/gnome-shell/St-1.0.typelib
-%{_libdir}/gnome-shell/ShellMenu-0.1.typelib
 %{_datadir}/GConf/gsettings/gnome-shell-overrides.convert
+%{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.PortalHelper.service
+%{_datadir}/glib-2.0/schemas/00_org.gnome.shell.gschema.override
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
@@ -242,7 +223,3 @@ fi
 %defattr(644,root,root,755)
 %{_gtkdocdir}/shell
 %{_gtkdocdir}/st
-
-%files -n browser-plugin-%{name}
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_browserpluginsdir}/libgnome-shell-browser-plugin.so
