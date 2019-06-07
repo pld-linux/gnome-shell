@@ -17,6 +17,7 @@
 %define		startup_notification_ver	0.11
 
 Summary:	Window manager and application launcher for GNOME
+Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
 Version:	3.32.2
 Release:	1
@@ -113,6 +114,14 @@ windows and launching applications. GNOME Shell takes advantage of the
 capabilities of modern graphics hardware and introduces innovative
 user interface concepts to provide a delightful and easy to use
 experience.
+
+%description -l pl.UTF-8
+GNOME Shell to technologia definiująca doznania użytkownika środowiska
+graficznego GNOME 3. Zapewnia podstawowe funkcje interfejsu, takie jak
+przełączanie między oknami czy uruchamianie aplikacji. GNOME Shell
+wykorzystuje mozliwości współczesnego sprzętu graficznego i wprowadza
+innowacyjne koncepcje interfejsu użytkownika, zapewniające przyjemne
+doznania i łatwość użycia.
 
 %package devel
 Summary:	Development files for GNOME Shell
