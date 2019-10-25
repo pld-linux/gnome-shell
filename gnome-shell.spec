@@ -19,12 +19,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	3.32.2
+Version:	3.34.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.32/%{name}-%{version}.tar.xz
-# Source0-md5:	632b67075ebdc183f94461fa05a8505b
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.34/%{name}-%{version}.tar.xz
+# Source0-md5:	2e00c22673d069d6b919b2ca1b225d89
 URL:		http://live.gnome.org/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
@@ -35,6 +35,7 @@ BuildRequires:	gdk-pixbuf2-devel
 BuildRequires:	gettext-tools >= 0.19.6
 BuildRequires:	gjs-devel >= %{gjs_ver}
 BuildRequires:	glib2-devel >= %{glib_ver}
+BuildRequires:	gnome-autoar-devel
 BuildRequires:	gnome-bluetooth-devel >= %{gnome_bluetooth_ver}
 BuildRequires:	gnome-control-center-devel
 # for cldr2json.py (through pygobject->gi)
@@ -184,6 +185,7 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc NEWS README.md
+%attr(755,root,root) %{_bindir}/gnome-extensions
 %attr(755,root,root) %{_bindir}/gnome-shell
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-prefs
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
@@ -214,11 +216,14 @@ fi
 %{_desktopdir}/gnome-shell-extension-prefs.desktop
 %{_desktopdir}/org.gnome.Shell.desktop
 %{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
+%{_mandir}/man1/gnome-extensions.1*
 %{_mandir}/man1/gnome-shell.1*
 %{_sysconfdir}/xdg/autostart/gnome-shell-overrides-migration.desktop
+%{systemduserunitdir}/gnome-shell-disable-extensions.service
+%{systemduserunitdir}/gnome-shell-wayland.service
 %{systemduserunitdir}/gnome-shell-wayland.target
+%{systemduserunitdir}/gnome-shell-x11.service
 %{systemduserunitdir}/gnome-shell-x11.target
-%{systemduserunitdir}/gnome-shell.service
 
 %files devel
 %defattr(644,root,root,755)
