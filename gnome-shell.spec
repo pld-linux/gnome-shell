@@ -20,7 +20,7 @@ Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
 Version:	3.34.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.34/%{name}-%{version}.tar.xz
@@ -74,7 +74,6 @@ BuildRequires:	xorg-lib-libXfixes-devel
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 # gjs->gi->NMA.gir
-Requires:	NetworkManager-gtk-lib >= %{NetworkManager_ver}
 Requires:	NetworkManager-libs >= %{NetworkManager_ver}
 Requires:	at-spi2-atk >= 2.4.0
 Requires:	clutter >= %{clutter_ver}
