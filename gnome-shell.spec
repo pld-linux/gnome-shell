@@ -1,16 +1,17 @@
 %define		clutter_ver			1.21.5
-%define		evolution_data_server_ver	3.18.0
+# max(ecal_req, eds_req)
+%define		evolution_data_server_ver	3.33.1
 %define		gcr_ver				3.7.5
-%define		gjs_ver				1.54.0
+%define		gjs_ver				1.57.3
 %define		glib_ver			1:2.56.0
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		3.7.90
-%define		gsettings_desktop_schemas_ver	3.28.0
+%define		gsettings_desktop_schemas_ver	3.33.1
 %define		gtk_ver				3.15.0
 %define		json_glib_ver			0.13.90
 %define		libcroco_ver			0.6.8
 %define		libsecret_ver			0.18
-%define		mutter_ver			3.32.0
+%define		mutter_ver			3.34.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			2.0
@@ -25,7 +26,7 @@ License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.34/%{name}-%{version}.tar.xz
 # Source0-md5:	2e00c22673d069d6b919b2ca1b225d89
-URL:		http://live.gnome.org/GnomeShell
+URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
 BuildRequires:	clutter-devel >= %{clutter_ver}
@@ -64,7 +65,7 @@ BuildRequires:	pulseaudio-devel >= %{pulseaudio_ver}
 BuildRequires:	python3
 BuildRequires:	python3-pygobject3 >= 3
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.601
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	sassc
 BuildRequires:	startup-notification-devel >= %{startup_notification_ver}
 BuildRequires:	systemd-devel
