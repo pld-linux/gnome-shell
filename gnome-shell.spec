@@ -2,7 +2,7 @@
 # max(ecal_req, eds_req)
 %define		evolution_data_server_ver	3.33.1
 %define		gcr_ver				3.7.5
-%define		gjs_ver				1.57.3
+%define		gjs_ver				1.63.2
 %define		glib_ver			1:2.56.0
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		3.7.90
@@ -20,12 +20,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	3.34.3
+Version:	3.36.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.34/%{name}-%{version}.tar.xz
-# Source0-md5:	a0f7d78f57616076890f0e3b7f12196a
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.36/%{name}-%{version}.tar.xz
+# Source0-md5:	f0cd44e573a82531b4556afa624b1193
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
@@ -199,23 +199,36 @@ fi
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-menu.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgvc.so
+%attr(755,root,root) %{_libdir}/gnome-shell/libshew-0.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libst-1.0.so
 %{_libdir}/gnome-shell/Gvc-1.0.typelib
 %{_libdir}/gnome-shell/Shell-0.1.typelib
 %{_libdir}/gnome-shell/St-1.0.typelib
+%dir %{_libdir}/gnome-shell/girepository-1.0
+%{_libdir}/gnome-shell/girepository-1.0/Shew-0.typelib
 %{_datadir}/GConf/gsettings/gnome-shell-overrides.convert
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
+%{_datadir}/dbus-1/services/org.gnome.Extensions.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
+%{_datadir}/dbus-1/services/org.gnome.Shell.Extensions.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
+%{_datadir}/dbus-1/services/org.gnome.Shell.Notifications.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.PortalHelper.service
 %{_datadir}/glib-2.0/schemas/00_org.gnome.shell.gschema.override
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
+%{_datadir}/metainfo/org.gnome.Extensions.metainfo.xml
 %{_datadir}/xdg-desktop-portal/portals/gnome-shell.portal
-%{_desktopdir}/gnome-shell-extension-prefs.desktop
+%{_desktopdir}/org.gnome.Extensions.desktop
 %{_desktopdir}/org.gnome.Shell.desktop
+%{_desktopdir}/org.gnome.Shell.Extensions.desktop
 %{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
+/usr/share/icons/hicolor/scalable/apps/org.gnome.Extensions.Devel.svg
+/usr/share/icons/hicolor/scalable/apps/org.gnome.Extensions.svg
+/usr/share/icons/hicolor/scalable/apps/org.gnome.Shell.Extensions.svg
+/usr/share/icons/hicolor/symbolic/apps/org.gnome.Extensions-symbolic.svg
+/usr/share/icons/hicolor/symbolic/apps/org.gnome.Shell.Extensions-symbolic.svg
 %{_mandir}/man1/gnome-extensions.1*
 %{_mandir}/man1/gnome-shell.1*
 %{_sysconfdir}/xdg/autostart/gnome-shell-overrides-migration.desktop
