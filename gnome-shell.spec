@@ -5,13 +5,13 @@
 %define		gjs_ver				1.63.2
 %define		glib_ver			1:2.56.0
 %define		gnome_bluetooth_ver		3.9.0
-%define		gnome_desktop_ver		3.7.90
+%define		gnome_desktop_ver		3.36.0
 %define		gsettings_desktop_schemas_ver	3.33.1
 %define		gtk_ver				3.15.0
 %define		json_glib_ver			0.13.90
 %define		libcroco_ver			0.6.8
 %define		libsecret_ver			0.18
-%define		mutter_ver			3.34.0
+%define		mutter_ver			3.36.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			2.0
@@ -20,19 +20,19 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	3.36.2
+Version:	3.36.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.36/%{name}-%{version}.tar.xz
-# Source0-md5:	f0cd44e573a82531b4556afa624b1193
+# Source0-md5:	9a86d5ff375c58e007cbc0f9e2ca82e4
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
 BuildRequires:	clutter-devel >= %{clutter_ver}
 BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_ver}
 BuildRequires:	gcr-devel >= %{gcr_ver}
-BuildRequires:	gdk-pixbuf2-devel
+BuildRequires:	gdk-pixbuf2-devel >= 2.0
 BuildRequires:	gettext-tools >= 0.19.6
 BuildRequires:	gjs-devel >= %{gjs_ver}
 BuildRequires:	glib2-devel >= %{glib_ver}
@@ -62,11 +62,12 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= %{polkit_ver}
 BuildRequires:	pulseaudio-devel >= %{pulseaudio_ver}
-BuildRequires:	python3
+BuildRequires:	python3 >= 3
 BuildRequires:	python3-pygobject3 >= 3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	sassc
+BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= %{startup_notification_ver}
 BuildRequires:	systemd-devel
 BuildRequires:	tar >= 1:1.22
@@ -140,7 +141,7 @@ Summary:	GNOME Shell API documentation
 Summary(pl.UTF-8):	Dokumentacja API GNOME Shell
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -153,9 +154,12 @@ Ten pakiet dostarcza dokumentację API GNOME Shell.
 %prep
 %setup -q
 
+%{__sed} -i -e '/^libshew =/ s/ library/ shared_library/' subprojects/shew/src/meson.build
+
 %build
 %meson build \
 	-Dgtk_doc=true
+
 %meson_build -C build
 
 %install
@@ -186,6 +190,7 @@ fi
 %defattr(644,root,root,755)
 %doc NEWS README.md
 %attr(755,root,root) %{_bindir}/gnome-extensions
+%attr(755,root,root) %{_bindir}/gnome-extensions-app
 %attr(755,root,root) %{_bindir}/gnome-shell
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-prefs
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
@@ -224,11 +229,11 @@ fi
 %{_desktopdir}/org.gnome.Shell.desktop
 %{_desktopdir}/org.gnome.Shell.Extensions.desktop
 %{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
-/usr/share/icons/hicolor/scalable/apps/org.gnome.Extensions.Devel.svg
-/usr/share/icons/hicolor/scalable/apps/org.gnome.Extensions.svg
-/usr/share/icons/hicolor/scalable/apps/org.gnome.Shell.Extensions.svg
-/usr/share/icons/hicolor/symbolic/apps/org.gnome.Extensions-symbolic.svg
-/usr/share/icons/hicolor/symbolic/apps/org.gnome.Shell.Extensions-symbolic.svg
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Extensions.Devel.svg
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Extensions.svg
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Shell.Extensions.svg
+%{_iconsdir}/hicolor/symbolic/apps/org.gnome.Extensions-symbolic.svg
+%{_iconsdir}/hicolor/symbolic/apps/org.gnome.Shell.Extensions-symbolic.svg
 %{_mandir}/man1/gnome-extensions.1*
 %{_mandir}/man1/gnome-shell.1*
 %{_sysconfdir}/xdg/autostart/gnome-shell-overrides-migration.desktop
