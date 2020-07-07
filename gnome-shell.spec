@@ -20,12 +20,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	3.36.3
+Version:	3.36.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.36/%{name}-%{version}.tar.xz
-# Source0-md5:	9a86d5ff375c58e007cbc0f9e2ca82e4
+# Source0-md5:	6227e7986a8eb6fdf48ed8f06d55a99f
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
