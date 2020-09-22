@@ -1,9 +1,13 @@
+#
+# Conditional build:
+%bcond_without	apidocs	# API documentation
+
 %define		clutter_ver			1.21.5
 # max(ecal_req, eds_req)
 %define		evolution_data_server_ver	3.33.1
 %define		gcr_ver				3.7.5
-%define		gjs_ver				1.63.2
-%define		glib_ver			1:2.56.0
+%define		gjs_ver				1.65.1
+%define		glib_ver			1:2.57.2
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		3.36.0
 %define		gsettings_desktop_schemas_ver	3.33.1
@@ -11,7 +15,7 @@
 %define		json_glib_ver			0.13.90
 %define		libcroco_ver			0.6.8
 %define		libsecret_ver			0.18
-%define		mutter_ver			3.36.0
+%define		mutter_ver			3.38.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			2.0
@@ -20,12 +24,13 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	3.36.6
-Release:	2
+Version:	3.38.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.36/%{name}-%{version}.tar.xz
-# Source0-md5:	60103fd2370e7f1cc9e7ba8c7a711379
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.38/%{name}-%{version}.tar.xz
+# Source0-md5:	8a70b4b78fc076b86aefb3c83f0e77d5
+Patch0:		%{name}-gtkdoc.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
@@ -46,7 +51,7 @@ BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_ve
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= %{gtk_ver}
-BuildRequires:	gtk-doc >= 1.15
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.15}
 BuildRequires:	ibus-devel >= 1.5.2
 BuildRequires:	json-glib-devel >= %{json_glib_ver}
 BuildRequires:	libcanberra-devel
@@ -56,13 +61,14 @@ BuildRequires:	libsecret-devel >= %{libsecret_ver}
 BuildRequires:	libsoup-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.47.0
+BuildRequires:	meson >= 0.53.0
 BuildRequires:	mutter-devel >= %{mutter_ver}
 BuildRequires:	ninja >= 1.5
+BuildRequires:	pipewire-devel >= 0.3
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= %{polkit_ver}
 BuildRequires:	pulseaudio-devel >= %{pulseaudio_ver}
-BuildRequires:	python3 >= 3
+BuildRequires:	python3 >= 1:3
 BuildRequires:	python3-pygobject3 >= 3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.736
@@ -70,11 +76,12 @@ BuildRequires:	sassc
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= %{startup_notification_ver}
 BuildRequires:	systemd-devel
+BuildRequires:	systemd-units
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXfixes-devel
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,postun):	glib2 >= %{glib_ver}
 # gjs->gi->NMA.gir
 Requires:	NetworkManager-libs >= %{NetworkManager_ver}
 Requires:	adwaita-icon-theme
@@ -153,12 +160,13 @@ Ten pakiet dostarcza dokumentację API GNOME Shell.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__sed} -i -e '/^libshew =/ s/ library/ shared_library/' subprojects/shew/src/meson.build
 
 %build
 %meson build \
-	-Dgtk_doc=true
+	%{?with_apidocs:-Dgtk_doc=true}
 
 %meson_build -C build
 
@@ -219,6 +227,7 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.Notifications.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.PortalHelper.service
+%{_datadir}/dbus-1/services/org.gnome.Shell.Screencast.service
 %{_datadir}/glib-2.0/schemas/00_org.gnome.shell.gschema.override
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
@@ -237,11 +246,10 @@ fi
 %{_mandir}/man1/gnome-extensions.1*
 %{_mandir}/man1/gnome-shell.1*
 %{_sysconfdir}/xdg/autostart/gnome-shell-overrides-migration.desktop
-%{systemduserunitdir}/gnome-shell-disable-extensions.service
-%{systemduserunitdir}/gnome-shell-wayland.service
-%{systemduserunitdir}/gnome-shell-wayland.target
-%{systemduserunitdir}/gnome-shell-x11.service
-%{systemduserunitdir}/gnome-shell-x11.target
+%{systemduserunitdir}/org.gnome.Shell.target
+%{systemduserunitdir}/org.gnome.Shell-disable-extensions.service
+%{systemduserunitdir}/org.gnome.Shell@wayland.service
+%{systemduserunitdir}/org.gnome.Shell@x11.service
 
 %files devel
 %defattr(644,root,root,755)
@@ -252,7 +260,9 @@ fi
 %{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider2.xml
 
+%if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/shell
 %{_gtkdocdir}/st
+%endif
