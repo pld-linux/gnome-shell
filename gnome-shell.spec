@@ -24,13 +24,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	3.38.0
+Version:	3.38.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-shell/3.38/%{name}-%{version}.tar.xz
-# Source0-md5:	8a70b4b78fc076b86aefb3c83f0e77d5
-Patch0:		%{name}-gtkdoc.patch
+# Source0-md5:	a12f98e36f4cfc4b4f968c35edc6f778
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
@@ -71,7 +70,7 @@ BuildRequires:	pulseaudio-devel >= %{pulseaudio_ver}
 BuildRequires:	python3 >= 1:3
 BuildRequires:	python3-pygobject3 >= 3
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	sassc
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= %{startup_notification_ver}
@@ -148,9 +147,7 @@ Summary:	GNOME Shell API documentation
 Summary(pl.UTF-8):	Dokumentacja API GNOME Shell
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "4.6"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description apidocs
 This package provides GNOME Shell API documentation.
@@ -160,7 +157,6 @@ Ten pakiet dostarcza dokumentację API GNOME Shell.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %{__sed} -i -e '/^libshew =/ s/ library/ shared_library/' subprojects/shew/src/meson.build
 
