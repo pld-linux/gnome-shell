@@ -147,7 +147,7 @@ Summary:	GNOME Shell API documentation
 Summary(pl.UTF-8):	Dokumentacja API GNOME Shell
 Group:		Documentation
 Requires:	gtk-doc-common
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description apidocs
 This package provides GNOME Shell API documentation.
