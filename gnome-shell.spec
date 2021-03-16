@@ -18,21 +18,22 @@
 %define		mutter_ver			3.38.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
-%define		pulseaudio_ver			2.0
+%define		pulseaudio_ver			13
 %define		startup_notification_ver	0.11
 
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	3.38.3
+Version:	3.38.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	https://download.gnome.org/sources/gnome-shell/3.38/%{name}-%{version}.tar.xz
-# Source0-md5:	b5168fbfeae34eaeaf98d0ad8474f3f8
+# Source0-md5:	e6c891c430016ced449e38661ddf6dec
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
+BuildRequires:	bash-completion-devel >= 2.0
 BuildRequires:	clutter-devel >= %{clutter_ver}
 BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_ver}
 BuildRequires:	gcr-devel >= %{gcr_ver}
@@ -69,6 +70,7 @@ BuildRequires:	polkit-devel >= %{polkit_ver}
 BuildRequires:	pulseaudio-devel >= %{pulseaudio_ver}
 BuildRequires:	python3 >= 1:3
 BuildRequires:	python3-pygobject3 >= 3
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	sassc
@@ -131,10 +133,24 @@ wykorzystuje mozliwości współczesnego sprzętu graficznego i wprowadza
 innowacyjne koncepcje interfejsu użytkownika, zapewniające przyjemne
 doznania i łatwość użycia.
 
+%package -n bash-completion-gnome-shell
+Summary:	Bash completion for GNOME Shell commands
+Summary(pl.UTF-8):	Bashowe dopełnianie parametrów poleceń GNOME Shell
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	bash-completion >= 2.0
+
+%description -n bash-completion-gnome-shell
+Bash completion for GNOME Shell commands.
+
+%description -n bash-completion-gnome-shell -l pl.UTF-8
+Bashowe dopełnianie parametrów poleceń GNOME Shell.
+
 %package devel
 Summary:	Development files for GNOME Shell
 Summary(pl.UTF-8):	Pliki programistyczne dla GNOME Shell
 Group:		Development/Libraries
+BuildArch:	noarch
 
 %description devel
 This package provides development files for GNOME Shell.
@@ -246,6 +262,10 @@ fi
 %{systemduserunitdir}/org.gnome.Shell-disable-extensions.service
 %{systemduserunitdir}/org.gnome.Shell@wayland.service
 %{systemduserunitdir}/org.gnome.Shell@x11.service
+
+%files -n bash-completion-gnome-shell
+%defattr(644,root,root,755)
+%{bash_compdir}/gnome-extensions
 
 %files devel
 %defattr(644,root,root,755)
