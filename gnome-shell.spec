@@ -13,9 +13,8 @@
 %define		gsettings_desktop_schemas_ver	3.33.1
 %define		gtk_ver				3.15.0
 %define		json_glib_ver			0.13.90
-%define		libcroco_ver			0.6.8
 %define		libsecret_ver			0.18
-%define		mutter_ver			3.38.0
+%define		mutter_ver			40
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			13
@@ -24,12 +23,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	3.38.4
+Version:	40.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/3.38/%{name}-%{version}.tar.xz
-# Source0-md5:	e6c891c430016ced449e38661ddf6dec
+Source0:	https://download.gnome.org/sources/gnome-shell/40/%{name}-%{version}.tar.xz
+# Source0-md5:	e5f8d7af0965417969cb9da0b4495090
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	at-spi2-atk-devel
@@ -51,12 +50,12 @@ BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_ve
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= %{gtk_ver}
+BuildRequires:	gtk4-devel >= 4
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.15}
 BuildRequires:	ibus-devel >= 1.5.2
 BuildRequires:	json-glib-devel >= %{json_glib_ver}
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel
-BuildRequires:	libcroco-devel >= %{libcroco_ver}
 BuildRequires:	libsecret-devel >= %{libsecret_ver}
 BuildRequires:	libsoup-devel
 BuildRequires:	libxml2-devel >= 2.0
@@ -99,7 +98,6 @@ Requires:	gsettings-desktop-schemas >= %{gsettings_desktop_schemas_ver}
 Requires:	gtk+3 >= %{gtk_ver}
 Requires:	ibus >= 1.5.2
 Requires:	json-glib >= %{json_glib_ver}
-Requires:	libcroco >= %{libcroco_ver}
 Requires:	libsecret >= %{libsecret_ver}
 Requires:	mutter >= %{mutter_ver}
 Requires:	nautilus >= 3.8.0
@@ -139,6 +137,7 @@ Summary(pl.UTF-8):	Bashowe dopełnianie parametrów poleceń GNOME Shell
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 2.0
+BuildArch:	noarch
 
 %description -n bash-completion-gnome-shell
 Bash completion for GNOME Shell commands.
@@ -234,6 +233,7 @@ fi
 %{_datadir}/GConf/gsettings/gnome-shell-overrides.convert
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
 %{_datadir}/dbus-1/services/org.gnome.Extensions.service
+%{_datadir}/dbus-1/services/org.gnome.ScreenSaver.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.Extensions.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.HotplugSniffer.service
