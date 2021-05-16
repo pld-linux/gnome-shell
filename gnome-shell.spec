@@ -43,8 +43,7 @@ BuildRequires:	glib2-devel >= %{glib_ver}
 BuildRequires:	gnome-autoar-devel
 BuildRequires:	gnome-bluetooth-devel >= %{gnome_bluetooth_ver}
 BuildRequires:	gnome-control-center-devel
-# for cldr2json.py (through pygobject->gi)
-BuildRequires:	gnome-desktop >= %{gnome_desktop_ver}
+BuildRequires:	gnome-desktop-devel >= %{gnome_desktop_ver}
 BuildRequires:	gobject-introspection-devel >= 1.50.0
 BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_ver}
 BuildRequires:	gstreamer-devel >= 1.0.0
