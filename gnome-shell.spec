@@ -6,15 +6,16 @@
 # max(ecal_req, eds_req)
 %define		evolution_data_server_ver	3.33.1
 %define		gcr_ver				3.7.5
-%define		gjs_ver				1.65.1
+%define		gjs_ver				1.69.2
 %define		glib_ver			1:2.57.2
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		3.36.0
-%define		gsettings_desktop_schemas_ver	3.33.1
+%define		gsettings_desktop_schemas_ver	41
 %define		gtk_ver				3.15.0
+%define		ibus_ver			1.5.19
 %define		json_glib_ver			0.13.90
 %define		libsecret_ver			0.18
-%define		mutter_ver			40.0
+%define		mutter_ver			41.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			13
@@ -23,14 +24,15 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	40.4
+Version:	41.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/40/%{name}-%{version}.tar.xz
-# Source0-md5:	079b731cafd4db458b5d357c9a6ae697
+Source0:	https://download.gnome.org/sources/gnome-shell/41/%{name}-%{version}.tar.xz
+# Source0-md5:	18d7fec8e7678f57b32757f37e16e08c
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
+BuildRequires:	asciidoc
 BuildRequires:	at-spi2-atk-devel
 BuildRequires:	bash-completion-devel >= 2.0
 BuildRequires:	clutter-devel >= %{clutter_ver}
@@ -51,12 +53,13 @@ BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= %{gtk_ver}
 BuildRequires:	gtk4-devel >= 4
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.15}
-BuildRequires:	ibus-devel >= 1.5.2
+BuildRequires:	ibus-devel >= %{ibus_ver}
 BuildRequires:	json-glib-devel >= %{json_glib_ver}
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel
 BuildRequires:	libsecret-devel >= %{libsecret_ver}
-BuildRequires:	libsoup-devel
+# or libsoup3 with -Dsoup2=false, must be in sync with libgweather
+BuildRequires:	libsoup-devel >= 2.4
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.53.0
@@ -95,7 +98,7 @@ Requires:	gnome-desktop >= %{gnome_desktop_ver}
 Requires:	gnome-settings-daemon >= 3.8.0
 Requires:	gsettings-desktop-schemas >= %{gsettings_desktop_schemas_ver}
 Requires:	gtk+3 >= %{gtk_ver}
-Requires:	ibus >= 1.5.2
+Requires:	ibus >= %{ibus_ver}
 Requires:	json-glib >= %{json_glib_ver}
 Requires:	libsecret >= %{libsecret_ver}
 Requires:	mutter >= %{mutter_ver}
@@ -176,7 +179,8 @@ Ten pakiet dostarcza dokumentację API GNOME Shell.
 
 %build
 %meson build \
-	%{?with_apidocs:-Dgtk_doc=true}
+	%{?with_apidocs:-Dgtk_doc=true} \
+	-Dtests=false
 
 %meson_build -C build
 
@@ -229,7 +233,6 @@ fi
 %{_libdir}/gnome-shell/St-1.0.typelib
 %dir %{_libdir}/gnome-shell/girepository-1.0
 %{_libdir}/gnome-shell/girepository-1.0/Shew-0.typelib
-%{_datadir}/GConf/gsettings/gnome-shell-overrides.convert
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
 %{_datadir}/dbus-1/services/org.gnome.Extensions.service
 %{_datadir}/dbus-1/services/org.gnome.ScreenSaver.service
