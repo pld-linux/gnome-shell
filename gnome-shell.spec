@@ -6,16 +6,16 @@
 # max(ecal_req, eds_req)
 %define		evolution_data_server_ver	3.33.1
 %define		gcr_ver				3.7.5
-%define		gjs_ver				1.69.2
+%define		gjs_ver				1.71.1
 %define		glib_ver			1:2.57.2
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		3.36.0
-%define		gsettings_desktop_schemas_ver	41
+%define		gsettings_desktop_schemas_ver	42
 %define		gtk_ver				3.15.0
 %define		ibus_ver			1.5.19
 %define		json_glib_ver			0.13.90
 %define		libsecret_ver			0.18
-%define		mutter_ver			41.0
+%define		mutter_ver			42.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			13
@@ -24,12 +24,13 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	41.4
+Version:	42.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/41/%{name}-%{version}.tar.xz
-# Source0-md5:	9f49da92233a918d9dd4fe9d736f285c
+Source0:	https://download.gnome.org/sources/gnome-shell/42/%{name}-%{version}.tar.xz
+# Source0-md5:	3e7983b868bbe5fa705d16d5cea502d8
+Patch0:		%{name}-no-update.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	asciidoc
@@ -43,7 +44,7 @@ BuildRequires:	gettext-tools >= 0.19.6
 BuildRequires:	gjs-devel >= %{gjs_ver}
 BuildRequires:	glib2-devel >= %{glib_ver}
 BuildRequires:	gnome-autoar-devel
-BuildRequires:	gnome-bluetooth-devel >= %{gnome_bluetooth_ver}
+BuildRequires:	gnome-bluetooth3-devel >= %{gnome_bluetooth_ver}
 BuildRequires:	gnome-control-center-devel
 BuildRequires:	gnome-desktop-devel >= %{gnome_desktop_ver}
 BuildRequires:	gobject-introspection-devel >= 1.50.0
@@ -62,7 +63,7 @@ BuildRequires:	libsecret-devel >= %{libsecret_ver}
 BuildRequires:	libsoup-devel >= 2.4
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.53.0
+BuildRequires:	meson >= 0.58.0
 BuildRequires:	mutter-devel >= %{mutter_ver}
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pipewire-devel >= 0.3
@@ -174,6 +175,7 @@ Ten pakiet dostarcza dokumentację API GNOME Shell.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__sed} -i -e '/^libshew =/ s/ library/ shared_library/' subprojects/shew/src/meson.build
 
