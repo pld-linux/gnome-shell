@@ -25,7 +25,7 @@ Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
 Version:	42.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	https://download.gnome.org/sources/gnome-shell/42/%{name}-%{version}.tar.xz
@@ -94,7 +94,7 @@ Requires:	evolution-data-server >= %{evolution_data_server_ver}
 Requires:	gcr >= %{gcr_ver}
 Requires:	gjs >= %{gjs_ver}
 Requires:	glib2 >= %{glib_ver}
-Requires:	gnome-bluetooth-libs >= %{gnome_bluetooth_ver}
+Requires:	gnome-bluetooth3-libs >= %{gnome_bluetooth_ver}
 Requires:	gnome-desktop >= %{gnome_desktop_ver}
 Requires:	gnome-settings-daemon >= 3.8.0
 Requires:	gsettings-desktop-schemas >= %{gsettings_desktop_schemas_ver}
