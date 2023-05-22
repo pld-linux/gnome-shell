@@ -5,8 +5,8 @@
 %define		clutter_ver			1.21.5
 # max(ecal_req, eds_req)
 %define		evolution_data_server_ver	3.33.1
-%define		gcr_ver				3.7.5
-%define		gjs_ver				1.71.1
+%define		gcr_ver				3.90.0
+%define		gjs_ver				1.73.1
 %define		glib_ver			1:2.57.2
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		3.36.0
@@ -15,7 +15,7 @@
 %define		ibus_ver			1.5.19
 %define		json_glib_ver			0.13.90
 %define		libsecret_ver			0.18
-%define		mutter_ver			42.0
+%define		mutter_ver			43.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			13
@@ -24,21 +24,21 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	42.9
+Version:	43.5
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/42/%{name}-%{version}.tar.xz
-# Source0-md5:	2d900c0ede894f55b626e0cc1fbc3b23
+Source0:	https://download.gnome.org/sources/gnome-shell/43/%{name}-%{version}.tar.xz
+# Source0-md5:	4356867ac23623b7858ed12222a901ec
 Patch0:		%{name}-no-update.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
 BuildRequires:	asciidoc
 BuildRequires:	at-spi2-atk-devel
-BuildRequires:	bash-completion-devel >= 2.0
+BuildRequires:	bash-completion-devel >= 1:2.0
 BuildRequires:	clutter-devel >= %{clutter_ver}
 BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_ver}
-BuildRequires:	gcr-devel >= %{gcr_ver}
+BuildRequires:	gcr4-devel >= %{gcr_ver}
 BuildRequires:	gdk-pixbuf2-devel >= 2.0
 BuildRequires:	gettext-tools >= 0.19.6
 BuildRequires:	gjs-devel >= %{gjs_ver}
@@ -59,8 +59,8 @@ BuildRequires:	json-glib-devel >= %{json_glib_ver}
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel
 BuildRequires:	libsecret-devel >= %{libsecret_ver}
-# or libsoup3 with -Dsoup2=false, must be in sync with libgweather
-BuildRequires:	libsoup-devel >= 2.4
+# or libsoup 2.4 with -Dsoup2=true, must be in sync with libgweather
+BuildRequires:	libsoup3-devel >= 3.0
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.58.0
@@ -91,7 +91,7 @@ Requires:	adwaita-icon-theme
 Requires:	at-spi2-atk >= 2.4.0
 Requires:	clutter >= %{clutter_ver}
 Requires:	evolution-data-server >= %{evolution_data_server_ver}
-Requires:	gcr >= %{gcr_ver}
+Requires:	gcr4 >= %{gcr_ver}
 Requires:	gjs >= %{gjs_ver}
 Requires:	glib2 >= %{glib_ver}
 Requires:	gnome-bluetooth3-libs >= %{gnome_bluetooth_ver}
@@ -139,7 +139,7 @@ Summary:	Bash completion for GNOME Shell commands
 Summary(pl.UTF-8):	Bashowe dopełnianie parametrów poleceń GNOME Shell
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
-Requires:	bash-completion >= 2.0
+Requires:	bash-completion >= 1:2.0
 BuildArch:	noarch
 
 %description -n bash-completion-gnome-shell
