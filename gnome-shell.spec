@@ -25,7 +25,7 @@ Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
 Version:	43.5
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	https://download.gnome.org/sources/gnome-shell/43/%{name}-%{version}.tar.xz
@@ -192,10 +192,13 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/{extensions,search-providers}
 
 %meson_install -C build
 
+# useless
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/libgnome-shell*.a
 # evolution already ships this file
 %{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution-calendar.desktop
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/libgnome-shell*.a
+# not supported by glibc (as of 2.37)
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
 
 %find_lang %{name}
 
