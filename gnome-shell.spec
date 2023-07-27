@@ -9,13 +9,13 @@
 %define		gjs_ver				1.73.1
 %define		glib_ver			1:2.57.2
 %define		gnome_bluetooth_ver		3.9.0
-%define		gnome_desktop_ver		3.36.0
+%define		gnome_desktop_ver		40
 %define		gsettings_desktop_schemas_ver	42
 %define		gtk_ver				3.15.0
 %define		ibus_ver			1.5.19
 %define		json_glib_ver			0.13.90
 %define		libsecret_ver			0.18
-%define		mutter_ver			43.0
+%define		mutter_ver			44.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			13
@@ -24,12 +24,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	43.7
+Version:	44.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/43/%{name}-%{version}.tar.xz
-# Source0-md5:	770f8cce5bb8f15174af44eaf567c369
+Source0:	https://download.gnome.org/sources/gnome-shell/44/%{name}-%{version}.tar.xz
+# Source0-md5:	a73a7ba82782ad46378127a9a3acdec8
 Patch0:		%{name}-no-update.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
@@ -46,7 +46,7 @@ BuildRequires:	glib2-devel >= %{glib_ver}
 BuildRequires:	gnome-autoar-devel
 BuildRequires:	gnome-bluetooth3-devel >= %{gnome_bluetooth_ver}
 BuildRequires:	gnome-control-center-devel
-BuildRequires:	gnome-desktop-devel >= %{gnome_desktop_ver}
+BuildRequires:	gnome-desktop4-devel >= %{gnome_desktop_ver}
 BuildRequires:	gobject-introspection-devel >= 1.50.0
 BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_ver}
 BuildRequires:	gstreamer-devel >= 1.0.0
@@ -95,7 +95,7 @@ Requires:	gcr4 >= %{gcr_ver}
 Requires:	gjs >= %{gjs_ver}
 Requires:	glib2 >= %{glib_ver}
 Requires:	gnome-bluetooth3-libs >= %{gnome_bluetooth_ver}
-Requires:	gnome-desktop >= %{gnome_desktop_ver}
+Requires:	gnome-desktop4 >= %{gnome_desktop_ver}
 Requires:	gnome-settings-daemon >= 3.8.0
 Requires:	gsettings-desktop-schemas >= %{gsettings_desktop_schemas_ver}
 Requires:	gtk+3 >= %{gtk_ver}
@@ -193,9 +193,7 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/{extensions,search-providers}
 %meson_install -C build
 
 # useless
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/libgnome-shell*.a
-# evolution already ships this file
-%{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution-calendar.desktop
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/lib*.a
 
 # not supported by glibc (as of 2.37)
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
@@ -224,18 +222,17 @@ fi
 %attr(755,root,root) %{_bindir}/gnome-shell-perf-tool
 %attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
 %attr(755,root,root) %{_libexecdir}/gnome-shell-hotplug-sniffer
-%attr(755,root,root) %{_libexecdir}/gnome-shell-overrides-migration.sh
 %attr(755,root,root) %{_libexecdir}/gnome-shell-perf-helper
 %attr(755,root,root) %{_libexecdir}/gnome-shell-portal-helper
 %dir %{_libdir}/gnome-shell
-%attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-menu.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgvc.so
+%attr(755,root,root) %{_libdir}/gnome-shell/libshell-12.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libshew-0.so
-%attr(755,root,root) %{_libdir}/gnome-shell/libst-1.0.so
+%attr(755,root,root) %{_libdir}/gnome-shell/libst-12.so
 %{_libdir}/gnome-shell/Gvc-1.0.typelib
-%{_libdir}/gnome-shell/Shell-0.1.typelib
-%{_libdir}/gnome-shell/St-1.0.typelib
+%{_libdir}/gnome-shell/Shell-12.typelib
+%{_libdir}/gnome-shell/St-12.typelib
 %dir %{_libdir}/gnome-shell/girepository-1.0
 %{_libdir}/gnome-shell/girepository-1.0/Shew-0.typelib
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
@@ -264,7 +261,6 @@ fi
 %{_iconsdir}/hicolor/symbolic/apps/org.gnome.Shell.Extensions-symbolic.svg
 %{_mandir}/man1/gnome-extensions.1*
 %{_mandir}/man1/gnome-shell.1*
-%{_sysconfdir}/xdg/autostart/gnome-shell-overrides-migration.desktop
 %{systemduserunitdir}/org.gnome.Shell.target
 %{systemduserunitdir}/org.gnome.Shell-disable-extensions.service
 %{systemduserunitdir}/org.gnome.Shell@wayland.service
