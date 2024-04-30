@@ -10,12 +10,12 @@
 %define		glib_ver			1:2.57.2
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		40
-%define		gsettings_desktop_schemas_ver	42
+%define		gsettings_desktop_schemas_ver	46
 %define		gtk_ver				4.0
 %define		ibus_ver			1.5.19
 %define		json_glib_ver			0.13.90
 %define		libsecret_ver			0.18
-%define		mutter_ver			45.0
+%define		mutter_ver			46.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			13
@@ -25,12 +25,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	45.4
+Version:	46.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/45/%{name}-%{version}.tar.xz
-# Source0-md5:	4b3f4593b986af9799e8a62f87d723ae
+Source0:	https://download.gnome.org/sources/gnome-shell/46/%{name}-%{version}.tar.xz
+# Source0-md5:	56c2bf53f35792430ff0acd08ddb4047
 Patch0:		%{name}-no-update.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
@@ -42,6 +42,7 @@ BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_ver}
 BuildRequires:	gcr4-devel >= %{gcr_ver}
 BuildRequires:	gdk-pixbuf2-devel >= 2.0
 BuildRequires:	gettext-tools >= 0.19.6
+%{?with_apidocs:BuildRequires:	gi-docgen}
 BuildRequires:	gjs-devel >= %{gjs_ver}
 BuildRequires:	glib2-devel >= %{glib_ver}
 BuildRequires:	gnome-autoar-devel
@@ -53,7 +54,6 @@ BuildRequires:	gsettings-desktop-schemas-devel >= %{gsettings_desktop_schemas_ve
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk4-devel >= %{gtk_ver}
-%{?with_apidocs:BuildRequires:	gtk-doc >= 1.15}
 BuildRequires:	ibus-devel >= %{ibus_ver}
 BuildRequires:	json-glib-devel >= %{json_glib_ver}
 BuildRequires:	libsecret-devel >= %{libsecret_ver}
@@ -72,7 +72,7 @@ BuildRequires:	python3 >= 1:3
 BuildRequires:	python3-pygobject3 >= 3
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.029
 BuildRequires:	sassc
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= %{startup_notification_ver}
@@ -115,6 +115,8 @@ Suggests:	gnome-icon-theme-symbolic >= 3.8.0
 Provides:	gdm-wm = 3.8.0
 Obsoletes:	browser-plugin-gnome-shell < 3.32.2-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		apiver		14
 
 %description
 GNOME Shell is the defining technology of the GNOME 3 desktop user
@@ -190,6 +192,11 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome-shell/{extensions,search-providers}
 
 %meson_install -C build
 
+%if %{with apidocs}
+install -d $RPM_BUILD_ROOT%{_gidocdir}
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/{shell,st} $RPM_BUILD_ROOT%{_gidocdir}
+%endif
+
 # useless
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-shell/lib*.a
 
@@ -225,12 +232,12 @@ fi
 %dir %{_libdir}/gnome-shell
 %attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-menu.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libgvc.so
-%attr(755,root,root) %{_libdir}/gnome-shell/libshell-13.so
+%attr(755,root,root) %{_libdir}/gnome-shell/libshell-%{apiver}.so
 %attr(755,root,root) %{_libdir}/gnome-shell/libshew-0.so
-%attr(755,root,root) %{_libdir}/gnome-shell/libst-13.so
+%attr(755,root,root) %{_libdir}/gnome-shell/libst-%{apiver}.so
 %{_libdir}/gnome-shell/Gvc-1.0.typelib
-%{_libdir}/gnome-shell/Shell-13.typelib
-%{_libdir}/gnome-shell/St-13.typelib
+%{_libdir}/gnome-shell/Shell-%{apiver}.typelib
+%{_libdir}/gnome-shell/St-%{apiver}.typelib
 %dir %{_libdir}/gnome-shell/girepository-1.0
 %{_libdir}/gnome-shell/girepository-1.0/Shew-0.typelib
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
@@ -243,11 +250,11 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Shell.PortalHelper.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.Screencast.service
 %{_datadir}/glib-2.0/schemas/00_org.gnome.shell.gschema.override
+%{_datadir}/glib-2.0/schemas/org.gnome.Extensions.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
 %{_datadir}/gnome-shell
 %{_datadir}/metainfo/org.gnome.Extensions.metainfo.xml
-%{_datadir}/xdg-desktop-portal/portals/gnome-shell.portal
 %{_desktopdir}/org.gnome.Extensions.desktop
 %{_desktopdir}/org.gnome.Shell.desktop
 %{_desktopdir}/org.gnome.Shell.Extensions.desktop
@@ -280,6 +287,6 @@ fi
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%{_gtkdocdir}/shell
-%{_gtkdocdir}/st
+%{_gidocdir}/shell
+%{_gidocdir}/st
 %endif
