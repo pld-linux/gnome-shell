@@ -1,6 +1,6 @@
---- gnome-shell-42.1/meson.build.orig	2022-05-05 23:12:39.835998500 +0200
-+++ gnome-shell-42.1/meson.build	2022-05-19 18:11:19.655953429 +0200
-@@ -295,11 +295,6 @@ if get_option('gtk_doc')
+--- gnome-shell-47.0/meson.build.orig	2024-10-04 17:03:07.277845091 +0200
++++ gnome-shell-47.0/meson.build	2024-10-04 17:06:04.576364580 +0200
+@@ -317,11 +317,6 @@ if get_option('gtk_doc')
    subdir('docs/reference')
  endif
  
@@ -9,6 +9,6 @@
 -  gtk_update_icon_cache: true
 -)
 -
- meson.add_dist_script('meson/generate-manpages.py')
  meson.add_dist_script('meson/generate-stylesheets.py')
  meson.add_dist_script('meson/check-version.py', meson.project_version(), 'NEWS')
+ 

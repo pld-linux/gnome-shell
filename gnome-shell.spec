@@ -2,20 +2,19 @@
 # Conditional build:
 %bcond_without	apidocs	# API documentation
 
-%define		clutter_ver			1.21.5
 # max(ecal_req, eds_req)
 %define		evolution_data_server_ver	3.33.1
 %define		gcr_ver				3.90.0
 %define		gjs_ver				1.73.1
-%define		glib_ver			1:2.57.2
+%define		glib_ver			1:2.79.2
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		40
-%define		gsettings_desktop_schemas_ver	46
+%define		gsettings_desktop_schemas_ver	47
 %define		gtk_ver				4.0
 %define		ibus_ver			1.5.19
 %define		json_glib_ver			0.13.90
 %define		libsecret_ver			0.18
-%define		mutter_ver			46.0
+%define		mutter_ver			47.0
 %define		NetworkManager_ver		1.10.4
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			13
@@ -25,19 +24,19 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	46.4
+Version:	47.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/46/%{name}-%{version}.tar.xz
-# Source0-md5:	44b69588f138be1e70fbe307eff3346f
+Source0:	https://download.gnome.org/sources/gnome-shell/47/%{name}-%{version}.tar.xz
+# Source0-md5:	42ee8af63dbf11d5259f294baddca038
 Patch0:		%{name}-no-update.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
-BuildRequires:	asciidoc
 BuildRequires:	at-spi2-atk-devel
 BuildRequires:	bash-completion-devel >= 1:2.0
-BuildRequires:	clutter-devel >= %{clutter_ver}
+# rst2man
+BuildRequires:	docutils
 BuildRequires:	evolution-data-server-devel >= %{evolution_data_server_ver}
 BuildRequires:	gcr4-devel >= %{gcr_ver}
 BuildRequires:	gdk-pixbuf2-devel >= 2.0
@@ -57,7 +56,6 @@ BuildRequires:	gtk4-devel >= %{gtk_ver}
 BuildRequires:	ibus-devel >= %{ibus_ver}
 BuildRequires:	json-glib-devel >= %{json_glib_ver}
 BuildRequires:	libsecret-devel >= %{libsecret_ver}
-# or libsoup 2.4 with -Dsoup2=true, must be in sync with libgweather
 BuildRequires:	libsoup3-devel >= 3.0
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-progs
@@ -87,7 +85,6 @@ Requires(post,postun):	glib2 >= %{glib_ver}
 Requires:	NetworkManager-libs >= %{NetworkManager_ver}
 Requires:	adwaita-icon-theme
 Requires:	at-spi2-atk >= 2.4.0
-Requires:	clutter >= %{clutter_ver}
 Requires:	evolution-data-server >= %{evolution_data_server_ver}
 Requires:	gcr4 >= %{gcr_ver}
 Requires:	gjs >= %{gjs_ver}
@@ -116,7 +113,7 @@ Provides:	gdm-wm = 3.8.0
 Obsoletes:	browser-plugin-gnome-shell < 3.32.2-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		apiver		14
+%define		apiver		15
 
 %description
 GNOME Shell is the defining technology of the GNOME 3 desktop user
@@ -222,7 +219,6 @@ fi
 %attr(755,root,root) %{_bindir}/gnome-extensions
 %attr(755,root,root) %{_bindir}/gnome-extensions-app
 %attr(755,root,root) %{_bindir}/gnome-shell
-%attr(755,root,root) %{_bindir}/gnome-shell-extension-prefs
 %attr(755,root,root) %{_bindir}/gnome-shell-extension-tool
 %attr(755,root,root) %{_bindir}/gnome-shell-test-tool
 %attr(755,root,root) %{_libexecdir}/gnome-shell-calendar-server
@@ -261,8 +257,10 @@ fi
 %{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Extensions.Devel.svg
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Extensions.svg
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Shell.CaptivePortal.svg
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Shell.Extensions.svg
 %{_iconsdir}/hicolor/symbolic/apps/org.gnome.Extensions-symbolic.svg
+%{_iconsdir}/hicolor/symbolic/apps/org.gnome.Shell.CaptivePortal-symbolic.svg
 %{_iconsdir}/hicolor/symbolic/apps/org.gnome.Shell.Extensions-symbolic.svg
 %{_mandir}/man1/gnome-extensions.1*
 %{_mandir}/man1/gnome-shell.1*
