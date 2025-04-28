@@ -9,13 +9,14 @@
 %define		glib_ver			1:2.79.2
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		40
-%define		gsettings_desktop_schemas_ver	47
+%define		gsettings_desktop_schemas_ver	48
 %define		gtk_ver				4.0
 %define		ibus_ver			1.5.19
 %define		json_glib_ver			0.13.90
 %define		libsecret_ver			0.18
-%define		mutter_ver			47.0
+%define		mutter_ver			48.0
 %define		NetworkManager_ver		1.10.4
+%define		pango_ver			1:1.46.0
 %define		polkit_ver			0.100
 %define		pulseaudio_ver			13
 %define		startup_notification_ver	0.11
@@ -24,12 +25,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	47.6
+Version:	48.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/47/%{name}-%{version}.tar.xz
-# Source0-md5:	85c51f1800e275f02bf64519094402f1
+Source0:	https://download.gnome.org/sources/gnome-shell/48/%{name}-%{version}.tar.xz
+# Source0-md5:	c6c144bfb1c9c386f9b1a219cc5562ac
 Patch0:		%{name}-no-update.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
@@ -59,9 +60,10 @@ BuildRequires:	libsecret-devel >= %{libsecret_ver}
 BuildRequires:	libsoup3-devel >= 3.0
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.58.0
+BuildRequires:	meson >= 1.1.0
 BuildRequires:	mutter-devel >= %{mutter_ver}
 BuildRequires:	ninja >= 1.5
+BuildRequires:	pango-devel >= %{pango_ver}
 BuildRequires:	pipewire-devel >= 0.3.49
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	polkit-devel >= %{polkit_ver}
@@ -99,6 +101,7 @@ Requires:	json-glib >= %{json_glib_ver}
 Requires:	libsecret >= %{libsecret_ver}
 Requires:	mutter >= %{mutter_ver}
 Requires:	nautilus >= 3.8.0
+Requires:	pango >= %{pango_ver}
 Requires:	polkit >= %{polkit_ver}
 Requires:	pulseaudio-libs >= %{pulseaudio_ver}
 Requires:	startup-notification >= %{startup_notification_ver}
@@ -113,7 +116,7 @@ Provides:	gdm-wm = 3.8.0
 Obsoletes:	browser-plugin-gnome-shell < 3.32.2-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		apiver		15
+%define		apiver		16
 
 %description
 GNOME Shell is the defining technology of the GNOME 3 desktop user
@@ -236,7 +239,6 @@ fi
 %{_libdir}/gnome-shell/St-%{apiver}.typelib
 %dir %{_libdir}/gnome-shell/girepository-1.0
 %{_libdir}/gnome-shell/girepository-1.0/Shew-0.typelib
-%{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
 %{_datadir}/dbus-1/services/org.gnome.Extensions.service
 %{_datadir}/dbus-1/services/org.gnome.ScreenSaver.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.CalendarServer.service
@@ -245,6 +247,8 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Shell.Notifications.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.PortalHelper.service
 %{_datadir}/dbus-1/services/org.gnome.Shell.Screencast.service
+%{_datadir}/desktop-directories/X-GNOME-Shell-System.directory
+%{_datadir}/desktop-directories/X-GNOME-Shell-Utilities.directory
 %{_datadir}/glib-2.0/schemas/00_org.gnome.shell.gschema.override
 %{_datadir}/glib-2.0/schemas/org.gnome.Extensions.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.gschema.xml
@@ -276,7 +280,9 @@ fi
 %files devel
 %defattr(644,root,root,755)
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Extensions.xml
+%{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.PadOsd.xml
+%{_datadir}/dbus-1/interfaces/org.gnome.Shell.ScreenTime.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Screencast.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Screenshot.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.ShellSearchProvider.xml
