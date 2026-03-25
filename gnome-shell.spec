@@ -25,12 +25,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	48.7
+Version:	48.8
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
 Source0:	https://download.gnome.org/sources/gnome-shell/48/%{name}-%{version}.tar.xz
-# Source0-md5:	6ac6a325767c91f81e7ee1c076564d39
+# Source0-md5:	24351bb2fbc3e3914b938d934862e238
 Patch0:		%{name}-no-update.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
