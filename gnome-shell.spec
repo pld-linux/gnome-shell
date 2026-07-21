@@ -5,16 +5,16 @@
 # max(ecal_req, eds_req)
 %define		evolution_data_server_ver	3.33.1
 %define		gcr_ver				3.90.0
-%define		gjs_ver				1.73.1
-%define		glib_ver			1:2.79.2
+%define		gjs_ver				1.87.1
+%define		glib_ver			1:2.86.0
 %define		gnome_bluetooth_ver		3.9.0
 %define		gnome_desktop_ver		40
-%define		gsettings_desktop_schemas_ver	48
+%define		gsettings_desktop_schemas_ver	50
 %define		gtk_ver				4.0
 %define		ibus_ver			1.5.19
 %define		json_glib_ver			0.13.90
 %define		libsecret_ver			0.18
-%define		mutter_ver			48.0
+%define		mutter_ver			50.0
 %define		NetworkManager_ver		1.10.4
 %define		pango_ver			1:1.46.0
 %define		polkit_ver			0.100
@@ -25,12 +25,12 @@
 Summary:	Window manager and application launcher for GNOME
 Summary(pl.UTF-8):	Zarządca okien i uruchamiania aplikacji dla GNOME
 Name:		gnome-shell
-Version:	48.8
+Version:	50.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Window Managers
-Source0:	https://download.gnome.org/sources/gnome-shell/48/%{name}-%{version}.tar.xz
-# Source0-md5:	24351bb2fbc3e3914b938d934862e238
+Source0:	https://download.gnome.org/sources/gnome-shell/50/%{name}-%{version}.tar.xz
+# Source0-md5:	e3864e7b048ac53f644ab416c0f38a52
 Patch0:		%{name}-no-update.patch
 URL:		https://wiki.gnome.org/Projects/GnomeShell
 BuildRequires:	NetworkManager-devel >= %{NetworkManager_ver}
@@ -60,7 +60,7 @@ BuildRequires:	libsecret-devel >= %{libsecret_ver}
 BuildRequires:	libsoup3-devel >= 3.0
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 1.1.0
+BuildRequires:	meson >= 1.3.0
 BuildRequires:	mutter-devel >= %{mutter_ver}
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pango-devel >= %{pango_ver}
@@ -116,7 +116,7 @@ Provides:	gdm-wm = 3.8.0
 Obsoletes:	browser-plugin-gnome-shell < 3.32.2-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		apiver		16
+%define		apiver		18
 
 %description
 GNOME Shell is the defining technology of the GNOME 3 desktop user
@@ -177,8 +177,6 @@ Ten pakiet dostarcza dokumentację API GNOME Shell.
 %setup -q
 %patch -P0 -p1
 
-%{__sed} -i -e '/^libshew =/ s/ library/ shared_library/' subprojects/shew/src/meson.build
-
 %build
 %meson \
 	%{?with_apidocs:-Dgtk_doc=true} \
@@ -229,11 +227,11 @@ fi
 %attr(755,root,root) %{_libexecdir}/gnome-shell-perf-helper
 %attr(755,root,root) %{_libexecdir}/gnome-shell-portal-helper
 %dir %{_libdir}/gnome-shell
-%attr(755,root,root) %{_libdir}/gnome-shell/libgnome-shell-menu.so
-%attr(755,root,root) %{_libdir}/gnome-shell/libgvc.so
-%attr(755,root,root) %{_libdir}/gnome-shell/libshell-%{apiver}.so
-%attr(755,root,root) %{_libdir}/gnome-shell/libshew-0.so
-%attr(755,root,root) %{_libdir}/gnome-shell/libst-%{apiver}.so
+%{_libdir}/gnome-shell/libgnome-shell-menu.so
+%{_libdir}/gnome-shell/libgvc.so
+%{_libdir}/gnome-shell/libshell-%{apiver}.so
+%{_libdir}/gnome-shell/libshew-0.so
+%{_libdir}/gnome-shell/libst-%{apiver}.so
 %{_libdir}/gnome-shell/Gvc-1.0.typelib
 %{_libdir}/gnome-shell/Shell-%{apiver}.typelib
 %{_libdir}/gnome-shell/St-%{apiver}.typelib
@@ -256,7 +254,6 @@ fi
 %{_datadir}/gnome-shell
 %{_datadir}/metainfo/org.gnome.Extensions.metainfo.xml
 %{_desktopdir}/org.gnome.Extensions.desktop
-%{_desktopdir}/org.gnome.Shell.desktop
 %{_desktopdir}/org.gnome.Shell.Extensions.desktop
 %{_desktopdir}/org.gnome.Shell.PortalHelper.desktop
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Extensions.Devel.svg
@@ -268,10 +265,8 @@ fi
 %{_iconsdir}/hicolor/symbolic/apps/org.gnome.Shell.Extensions-symbolic.svg
 %{_mandir}/man1/gnome-extensions.1*
 %{_mandir}/man1/gnome-shell.1*
-%{systemduserunitdir}/org.gnome.Shell.target
 %{systemduserunitdir}/org.gnome.Shell-disable-extensions.service
-%{systemduserunitdir}/org.gnome.Shell@wayland.service
-%{systemduserunitdir}/org.gnome.Shell@x11.service
+%{systemduserunitdir}/org.gnome.Shell@.service
 
 %files -n bash-completion-gnome-shell
 %defattr(644,root,root,755)
@@ -279,6 +274,7 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
+%{_datadir}/dbus-1/interfaces/org.gnome.Shell.Brightness.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Extensions.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.Introspect.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Shell.PadOsd.xml
